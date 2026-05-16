@@ -1,0 +1,82 @@
+.pocket-overlay{
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(0,0,0,.24);
+
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+
+  transition:opacity .22s ease;
+}
+
+.pocket-sheet{
+  position:fixed;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  padding:
+    16px
+    22px
+    calc(34px + env(safe-area-inset-bottom));
+
+  border-radius:28px 28px 0 0;
+
+  background:rgba(255,255,255,.84);
+
+  backdrop-filter:blur(30px);
+  -webkit-backdrop-filter:blur(30px);
+
+  box-shadow:
+    0 -20px 60px rgba(0,0,0,.15);
+
+  animation:sheetUp .28s ease;
+
+  transition:transform .22s ease;
+
+  touch-action:none;
+}
+
+.pocket-handle{
+  width:42px;
+  height:5px;
+
+  border-radius:999px;
+
+  background:rgba(0,0,0,.18);
+
+  margin:0 auto 20px;
+}
+
+.pocket-sheet h2{
+  font-size:32px;
+
+  line-height:1;
+
+  letter-spacing:-0.05em;
+
+  margin:0 0 16px;
+}
+
+.pocket-sheet p{
+  color:#6e6e73;
+
+  font-size:17px;
+
+  line-height:1.6;
+
+  margin-bottom:28px;
+}
+
+@keyframes sheetUp{
+  from{
+    transform:translateY(100%);
+  }
+
+  to{
+    transform:translateY(0);
+  }
+}

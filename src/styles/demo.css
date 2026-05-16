@@ -1,0 +1,97 @@
+.demo{
+  min-height:100vh;
+
+  display:grid;
+  place-items:center;
+
+  padding:24px;
+
+  background:
+    radial-gradient(circle at top,#ffffff,#f5f5f7 60%);
+}
+
+.iphone{
+  width:min(390px,100%);
+  min-height:780px;
+
+  padding:20px;
+
+  border-radius:44px;
+
+  background:rgba(255,255,255,.9);
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.14);
+
+  border:1px solid rgba(0,0,0,.05);
+}
+
+.statusbar{
+  display:flex;
+  justify-content:space-between;
+
+  padding:6px 6px 24px;
+
+  font-size:13px;
+  font-weight:600;
+
+  color:#111;
+}
+
+.intro{
+  padding:8px 4px 18px;
+}
+
+.eyebrow,
+.section-label{
+  font-size:11px;
+
+  letter-spacing:.22em;
+
+  text-transform:uppercase;
+
+  color:#007aff;
+
+  font-weight:700;
+}
+
+.iphone h1{
+  font-size:48px;
+
+  line-height:.94;
+
+  letter-spacing:-0.06em;
+
+  margin:12px 0 16px;
+}
+
+.iphone p{
+  color:#6e6e73;
+
+  font-size:17px;
+
+  line-height:1.55;
+}
+
+.iphone button,
+.pocket-close{
+  border:none;
+
+  border-radius:999px;
+
+  padding:15px 22px;
+
+  background:#007aff;
+
+  color:white;
+
+  font-size:16px;
+
+  font-weight:600;
+
+  cursor:pointer;
+}
+
+.cards-section{
+  margin-top:16px;
+}
