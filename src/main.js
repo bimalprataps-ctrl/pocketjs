@@ -2,69 +2,36 @@ import './style.css'
 import { Pocket } from './pocket.js'
 
 document.querySelector('#app').innerHTML = `
-  <main class="demo">
+  <main>
+    <h1>PocketJS</h1>
 
-    <section class="iphone">
+    <button id="toastBtn">Show Toast</button>
+    <button id="modalBtn">Show Modal</button>
 
-      <div class="statusbar">
-        <span>9:41</span>
-        <span>PocketJS</span>
-      </div>
-
-      <section class="intro">
-        <p class="eyebrow">MOBILE INTERACTION FRAMEWORK</p>
-
-        <h1>
-          Native-feeling web apps.
-        </h1>
-
-        <p>
-          PocketJS gives developers reusable mobile interactions like bottom sheets,
-          swipe cards, and touch-first UI patterns.
-        </p>
-
-        <button id="openSheet">
-          Open Bottom Sheet
-        </button>
-      </section>
-
-      <section class="cards-section">
-        <p class="section-label">Swipe Cards Demo</p>
-        <div id="cards"></div>
-      </section>
-
-    </section>
-
+    <div id="swipeDemo"></div>
   </main>
 `
 
-document.querySelector('#openSheet').onclick = () => {
-  Pocket.createBottomSheet({
-    title: 'iOS Bottom Sheet',
-    text: 'This is a reusable PocketJS component. It includes overlay blur, native motion, close behavior, and drag-to-close interaction.'
+document.querySelector('#toastBtn').onclick = () => {
+  Pocket.createToast({
+    message: 'PocketJS is running'
+  })
+}
+
+document.querySelector('#modalBtn').onclick = () => {
+  Pocket.createModal({
+    title: 'PocketJS Modal',
+    content: '<p>Modal working properly.</p>'
   })
 }
 
 Pocket.createSwipeCards({
-  mount: '#cards',
-
+  container: '#swipeDemo',
   cards: [
-    {
-      category: 'AUDIO',
-      title: 'OxfordMind',
-      text: 'Audio-first book learning built for the mobile era.'
-    },
-
-    {
-      category: 'SOCIAL',
-      title: 'ZeroFilter',
-      text: 'A calm text-first social network for slower interaction.'
-    },
-
-    {
-      category: 'LEARNING',
-      title: 'LearnTok',
-      text: 'Swipe-native educational experiences for the next generation.'
-    }
+    { content: 'Swipe me' },
+    { content: 'PocketJS' },
+    { content: 'Mobile UI' }
   ]
 })
+
+Pocket.createTabBar()

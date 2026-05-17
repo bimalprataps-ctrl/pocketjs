@@ -1,79 +1,23 @@
-.pocket-card-wrap{
-  margin-top:18px;
+.pocket-swipe-root {
+  position: relative;
+  width: min(340px, 90vw);
+  height: 420px;
+  margin: 30px auto;
 }
 
-.pocket-card{
-  min-height:230px;
-
-  padding:26px;
-
-  border-radius:34px;
-
-  background:white;
-
-  box-shadow:
-    0 25px 60px rgba(0,0,0,.12);
-
-  user-select:none;
-
-  touch-action:none;
-
-  cursor:grab;
-}
-
-.pocket-card:active{
-  cursor:grabbing;
-}
-
-.pocket-card-eyebrow{
-  font-size:12px;
-
-  letter-spacing:.24em;
-
-  color:#007aff;
-
-  text-transform:uppercase;
-
-  font-weight:700;
-}
-
-.pocket-card h2{
-  color:#111;
-
-  font-size:40px;
-
-  line-height:.95;
-
-  letter-spacing:-0.05em;
-
-  margin:12px 0;
-}
-
-.pocket-card p{
-  color:#6e6e73;
-
-  font-size:17px;
-
-  line-height:1.55;
-}
-
-.pocket-done{
-  padding:40px 0;
-
-  display:grid;
-  gap:8px;
-
-  text-align:center;
-
-  color:#6e6e73;
-}
-
-.pocket-done strong{
-  color:#111;
-
-  font-size:22px;
-}
-
-.pocket-done span{
-  font-size:15px;
+.pocket-swipe-card {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  border-radius: 32px;
+  background: #111;
+  color: white;
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+  touch-action: none;
+  user-select: none;
 }

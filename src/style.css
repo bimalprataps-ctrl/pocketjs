@@ -2,3 +2,9 @@
 @import './styles/demo.css';
 @import './styles/bottom-sheet.css';
 @import './styles/swipe-cards.css';
+@import './styles/toast.css';
+@import './styles/pull-refresh.css';
+@import './styles/action-sheet.css';
+@import './styles/tabs.css';
+@import './styles/modal.css';
+@import './styles/tab-bar.css';

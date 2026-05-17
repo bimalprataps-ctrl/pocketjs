@@ -1,0 +1,58 @@
+.pocket-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.pocket-modal-overlay.show {
+  opacity: 1;
+}
+
+.pocket-modal {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 32px;
+  background: #fff;
+  overflow: hidden;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.25s ease;
+  box-shadow: 0 30px 100px rgba(0,0,0,.22);
+}
+
+.pocket-modal.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.pocket-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 22px 0;
+}
+
+.pocket-modal-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.pocket-modal-close {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: #f2f2f2;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.pocket-modal-content {
+  padding: 22px;
+}

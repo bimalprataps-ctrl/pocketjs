@@ -1,0 +1,30 @@
+.pocket-toast {
+  position: fixed;
+  left: 50%;
+  z-index: 9999;
+  max-width: calc(100vw - 32px);
+  padding: 14px 18px;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 18px 60px rgba(0,0,0,.25);
+  opacity: 0;
+  transform: translateX(-50%) translateY(16px);
+  transition: .28s ease;
+  pointer-events: none;
+}
+
+.pocket-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.pocket-toast-bottom {
+  bottom: 28px;
+}
+
+.pocket-toast-top {
+  top: 28px;
+}

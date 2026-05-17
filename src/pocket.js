@@ -1,7 +1,11 @@
-import { createBottomSheet } from './components/bottom-sheet.js'
+import { createToast } from './components/toast.js'
+import { createModal } from './components/modal.js'
+import { createTabBar } from './components/tab-bar.js'
 import { createSwipeCards } from './components/swipe-cards.js'
 
 export const Pocket = {
-  createBottomSheet,
+  createToast,
+  createModal,
+  createTabBar,
   createSwipeCards
 }

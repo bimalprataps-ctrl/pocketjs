@@ -1,101 +1,81 @@
-export function createSwipeCards(config = {}) {
-  const mount = document.querySelector(config.mount)
+export function createSwipeCards(options = {}) {
+  const { container, cards = [] } = options
 
-  if (!mount) {
-    throw new Error('PocketJS: createSwipeCards requires a valid mount element.')
-  }
+  const root = typeof container === 'string'
+    ? document.querySelector(container)
+    : container
 
-  if (!config.cards || !Array.isArray(config.cards)) {
-    throw new Error('PocketJS: createSwipeCards requires a cards array.')
-  }
+  if (!root) return
 
-  let current = 0
+  let activeIndex = cards.length - 1
 
-  function render() {
-    const item = config.cards[current]
+  root.classList.add('pocket-swipe-root')
 
-    if (!item) {
-      mount.innerHTML = `
-        <div class="pocket-done">
-          <strong>No more cards</strong>
-          <span>Swipe stack complete.</span>
-        </div>
+  root.innerHTML = cards.map((card, index) => `
+    <div class="pocket-swipe-card" data-index="${index}">
+      ${card.content}
+    </div>
+  `).join('')
+
+  const cardElements = [...root.querySelectorAll('.pocket-swipe-card')]
+
+  function layoutCards() {
+    cardElements.forEach((card, index) => {
+      const depth = activeIndex - index
+
+      card.style.zIndex = index
+      card.style.opacity = depth < 0 ? '0' : '1'
+      card.style.transform = `
+        scale(${1 - Math.max(depth, 0) * 0.04})
+        translateY(${Math.max(depth, 0) * 10}px)
       `
-      return
-    }
+    })
+  }
 
-    mount.innerHTML = `
-      <section class="pocket-card-wrap">
+  layoutCards()
 
-        <article class="pocket-card" id="pocketCard">
-
-          <p class="pocket-card-eyebrow">
-            ${item.category || 'CARD'}
-          </p>
-
-          <h2>
-            ${item.title || 'Untitled'}
-          </h2>
-
-          <p>
-            ${item.text || ''}
-          </p>
-
-        </article>
-
-      </section>
-    `
-
-    const card = document.querySelector('#pocketCard')
-
+  cardElements.forEach((card, index) => {
     let startX = 0
     let currentX = 0
-    let dragging = false
 
-    card.addEventListener('pointerdown', (event) => {
-      dragging = true
-      startX = event.clientX
+    card.addEventListener('touchstart', (event) => {
+      if (index !== activeIndex) return
+
+      startX = event.touches[0].clientX
       card.style.transition = 'none'
-      card.setPointerCapture?.(event.pointerId)
     })
 
-    window.addEventListener('pointermove', (event) => {
-      if (!dragging) return
+    card.addEventListener('touchmove', (event) => {
+      if (index !== activeIndex) return
 
-      currentX = event.clientX - startX
+      currentX = event.touches[0].clientX
+      const diff = currentX - startX
 
       card.style.transform = `
-        translateX(${currentX}px)
-        rotate(${currentX * 0.04}deg)
+        translateX(${diff}px)
+        rotate(${diff * 0.05}deg)
       `
     })
 
-    window.addEventListener('pointerup', () => {
-      if (!dragging) return
+    card.addEventListener('touchend', () => {
+      if (index !== activeIndex) return
 
-      dragging = false
-      card.style.transition = 'all .22s ease'
+      const diff = currentX - startX
 
-      if (Math.abs(currentX) > 120) {
+      if (Math.abs(diff) > 120) {
+        card.style.transition = '0.35s ease'
         card.style.transform = `
-          translateX(${currentX > 0 ? 600 : -600}px)
-          rotate(${currentX * 0.06}deg)
+          translateX(${diff > 0 ? 1000 : -1000}px)
+          rotate(${diff > 0 ? 20 : -20}deg)
         `
+        card.style.opacity = '0'
 
-        setTimeout(() => {
-          current++
-          render()
-        }, 220)
+        activeIndex -= 1
+        setTimeout(layoutCards, 250)
       } else {
-        card.style.transform = `
-          translateX(0)
-          rotate(0deg)
-        `
+        card.style.transition = '0.35s ease'
+        layoutCards()
       }
-
-      currentX = 0
     })
-  }
-
-  render()
+  })
 }
