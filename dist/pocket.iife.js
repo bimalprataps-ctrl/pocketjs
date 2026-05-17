@@ -19,10 +19,10 @@ var Pocket=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     <div class="pocket-swipe-card" data-index="${t}">
       ${e.content}
     </div>
-  `).join(``);let o=[...r.querySelectorAll(`.pocket-swipe-card`)];function s(){o.forEach((e,t)=>{let r=i-t;if(r<0){e.style.opacity=`0`,e.style.pointerEvents=`none`,e.style.transform=`translateY(0) scale(1)`;return}e.style.opacity=`1`,e.style.zIndex=n.length-r,e.style.pointerEvents=r===0?`auto`:`none`,e.style.transition=`0.3s ease`,e.style.transform=`
+  `).join(``);let o=[...r.querySelectorAll(`.pocket-swipe-card`)];function s(){o.forEach((e,t)=>{let r=i-t;if(e.style.transition=`0.3s ease`,r<0){e.style.opacity=`0`,e.style.pointerEvents=`none`,e.style.transform=`translateX(1000px) rotate(20deg)`;return}e.style.opacity=`1`,e.style.zIndex=n.length-r,e.style.pointerEvents=r===0?`auto`:`none`,e.style.transform=`
         translateY(${r*34}px)
         scale(${1-r*.08})
-      `})}function c(){if(!a.length)return;i=a.pop();let e=o[i];e.style.transition=`none`,e.style.opacity=`1`,e.style.transform=`translateX(-1000px) rotate(-20deg)`,requestAnimationFrame(()=>{e.style.transition=`0.35s ease`,s()})}s(),o.forEach((e,t)=>{let n=0,r=0;e.addEventListener(`touchstart`,a=>{t===i&&(n=a.touches[0].clientX,r=n,e.style.transition=`none`)}),e.addEventListener(`touchmove`,a=>{if(t!==i)return;r=a.touches[0].clientX;let o=r-n;e.style.transform=`
-        translateX(${o}px)
-        rotate(${o*.05}deg)
-      `}),e.addEventListener(`touchend`,()=>{if(t!==i)return;let o=r-n;if(o>120){c();return}if(o<-120){e.style.transition=`0.35s ease`,e.style.transform=`translateX(-1000px) rotate(-20deg)`,e.style.opacity=`0`,a.push(i),--i,setTimeout(s,250);return}e.style.transition=`0.35s ease`,s()})})}var a={createToast:t,createModal:n,createTabBar:r,createSwipeCards:i};return typeof window<`u`&&(window.Pocket=a),e.Pocket=a,e})({});
+      `})}function c(){return a.length?(i=a.pop(),s(),!0):!1}s(),o.forEach((e,t)=>{let n=0,r=0,o=!1;e.addEventListener(`touchstart`,a=>{t===i&&(o=!0,n=a.touches[0].clientX,r=n,e.style.transition=`none`)},{passive:!0}),e.addEventListener(`touchmove`,a=>{if(t!==i||!o)return;r=a.touches[0].clientX;let s=r-n;e.style.transform=`
+        translateX(${s}px)
+        rotate(${s*.05}deg)
+      `},{passive:!0}),e.addEventListener(`touchend`,()=>{if(t!==i||!o)return;o=!1;let l=r-n;if(l<-120){e.style.transition=`0.35s ease`,e.style.transform=`translateX(-1000px) rotate(-20deg)`,e.style.opacity=`0`,a.push(i),--i,setTimeout(s,250);return}if(l>120){c()||(e.style.transition=`0.35s ease`,e.style.transform=`translateX(1000px) rotate(20deg)`,e.style.opacity=`0`,a.push(i),--i,setTimeout(s,250));return}s()},{passive:!0})})}var a={createToast:t,createModal:n,createTabBar:r,createSwipeCards:i};return typeof window<`u`&&(window.Pocket=a),e.Pocket=a,e})({});
