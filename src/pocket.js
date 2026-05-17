@@ -9,3 +9,7 @@ export const Pocket = {
   createTabBar,
   createSwipeCards
 }
+
+if (typeof window !== 'undefined') {
+  window.Pocket = Pocket
+}
