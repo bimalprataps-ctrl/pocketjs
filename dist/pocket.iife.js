@@ -19,10 +19,10 @@ var Pocket=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     <div class="pocket-swipe-card" data-index="${t}">
       ${e.content}
     </div>
-  `).join(``);let a=[...r.querySelectorAll(`.pocket-swipe-card`)];function o(){a.forEach((e,t)=>{let n=i-t;e.style.zIndex=t,e.style.opacity=n<0?`0`:`1`,e.style.transform=`
-        scale(${1-Math.max(n,0)*.04})
-        translateY(${Math.max(n,0)*10}px)
-      `})}o(),a.forEach((e,t)=>{let n=0,r=0;e.addEventListener(`touchstart`,r=>{t===i&&(n=r.touches[0].clientX,e.style.transition=`none`)}),e.addEventListener(`touchmove`,a=>{if(t!==i)return;r=a.touches[0].clientX;let o=r-n;e.style.transform=`
+  `).join(``);let a=[...r.querySelectorAll(`.pocket-swipe-card`)];function o(){a.forEach((e,t)=>{let r=i-t;if(r<0){e.style.opacity=`0`,e.style.pointerEvents=`none`;return}e.style.opacity=`1`,e.style.zIndex=n.length-r,e.style.pointerEvents=r===0?`auto`:`none`,e.style.transform=`
+        translateY(${r*34}px)
+        scale(${1-r*.08})
+      `})}o(),a.forEach((e,t)=>{let n=0,r=0;e.addEventListener(`touchstart`,a=>{t===i&&(n=a.touches[0].clientX,r=n,e.style.transition=`none`)}),e.addEventListener(`touchmove`,a=>{if(t!==i)return;r=a.touches[0].clientX;let o=r-n;e.style.transform=`
         translateX(${o}px)
         rotate(${o*.05}deg)
       `}),e.addEventListener(`touchend`,()=>{if(t!==i)return;let a=r-n;Math.abs(a)>120?(e.style.transition=`0.35s ease`,e.style.transform=`

@@ -23,11 +23,19 @@ export function createSwipeCards(options = {}) {
     cardElements.forEach((card, index) => {
       const depth = activeIndex - index
 
-      card.style.zIndex = index
-      card.style.opacity = depth < 0 ? '0' : '1'
+      if (depth < 0) {
+        card.style.opacity = '0'
+        card.style.pointerEvents = 'none'
+        return
+      }
+
+      card.style.opacity = '1'
+      card.style.zIndex = cards.length - depth
+      card.style.pointerEvents = depth === 0 ? 'auto' : 'none'
+
       card.style.transform = `
-        scale(${1 - Math.max(depth, 0) * 0.04})
-        translateY(${Math.max(depth, 0) * 10}px)
+        translateY(${depth * 34}px)
+        scale(${1 - depth * 0.08})
       `
     })
   }
@@ -42,6 +50,7 @@ export function createSwipeCards(options = {}) {
       if (index !== activeIndex) return
 
       startX = event.touches[0].clientX
+      currentX = startX
       card.style.transition = 'none'
     })
 
@@ -71,6 +80,7 @@ export function createSwipeCards(options = {}) {
         card.style.opacity = '0'
 
         activeIndex -= 1
+
         setTimeout(layoutCards, 250)
       } else {
         card.style.transition = '0.35s ease'
