@@ -15,17 +15,14 @@ var Pocket=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       <span class="pocket-tab-bar-icon">${e.icon}</span>
       <span class="pocket-tab-bar-label">${e.label}</span>
     </button>
-  `).join(``),document.body.appendChild(i),i.querySelectorAll(`.pocket-tab-bar-item`).forEach(e=>{e.onclick=()=>{i.querySelectorAll(`.pocket-tab-bar-item`).forEach(e=>{e.classList.remove(`active`)}),e.classList.add(`active`);let n=Number(e.dataset.index);r(n,t[n])}}),{destroy(){i.remove()}}}function i(e={}){let{container:t,cards:n=[]}=e,r=typeof t==`string`?document.querySelector(t):t;if(!r)return;let i=n.length-1;r.classList.add(`pocket-swipe-root`),r.innerHTML=n.map((e,t)=>`
+  `).join(``),document.body.appendChild(i),i.querySelectorAll(`.pocket-tab-bar-item`).forEach(e=>{e.onclick=()=>{i.querySelectorAll(`.pocket-tab-bar-item`).forEach(e=>{e.classList.remove(`active`)}),e.classList.add(`active`);let n=Number(e.dataset.index);r(n,t[n])}}),{destroy(){i.remove()}}}function i(e={}){let{container:t,cards:n=[]}=e,r=typeof t==`string`?document.querySelector(t):t;if(!r)return;let i=n.length-1,a=[];r.classList.add(`pocket-swipe-root`),r.innerHTML=n.map((e,t)=>`
     <div class="pocket-swipe-card" data-index="${t}">
       ${e.content}
     </div>
-  `).join(``);let a=[...r.querySelectorAll(`.pocket-swipe-card`)];function o(){a.forEach((e,t)=>{let r=i-t;if(r<0){e.style.opacity=`0`,e.style.pointerEvents=`none`;return}e.style.opacity=`1`,e.style.zIndex=n.length-r,e.style.pointerEvents=r===0?`auto`:`none`,e.style.transform=`
+  `).join(``);let o=[...r.querySelectorAll(`.pocket-swipe-card`)];function s(){o.forEach((e,t)=>{let r=i-t;if(r<0){e.style.opacity=`0`,e.style.pointerEvents=`none`,e.style.transform=`translateY(0) scale(1)`;return}e.style.opacity=`1`,e.style.zIndex=n.length-r,e.style.pointerEvents=r===0?`auto`:`none`,e.style.transition=`0.3s ease`,e.style.transform=`
         translateY(${r*34}px)
         scale(${1-r*.08})
-      `})}o(),a.forEach((e,t)=>{let n=0,r=0;e.addEventListener(`touchstart`,a=>{t===i&&(n=a.touches[0].clientX,r=n,e.style.transition=`none`)}),e.addEventListener(`touchmove`,a=>{if(t!==i)return;r=a.touches[0].clientX;let o=r-n;e.style.transform=`
+      `})}function c(){if(!a.length)return;i=a.pop();let e=o[i];e.style.transition=`none`,e.style.opacity=`1`,e.style.transform=`translateX(-1000px) rotate(-20deg)`,requestAnimationFrame(()=>{e.style.transition=`0.35s ease`,s()})}s(),o.forEach((e,t)=>{let n=0,r=0;e.addEventListener(`touchstart`,a=>{t===i&&(n=a.touches[0].clientX,r=n,e.style.transition=`none`)}),e.addEventListener(`touchmove`,a=>{if(t!==i)return;r=a.touches[0].clientX;let o=r-n;e.style.transform=`
         translateX(${o}px)
         rotate(${o*.05}deg)
-      `}),e.addEventListener(`touchend`,()=>{if(t!==i)return;let a=r-n;Math.abs(a)>120?(e.style.transition=`0.35s ease`,e.style.transform=`
-          translateX(${a>0?1e3:-1e3}px)
-          rotate(${a>0?20:-20}deg)
-        `,e.style.opacity=`0`,--i,setTimeout(o,250)):(e.style.transition=`0.35s ease`,o())})})}var a={createToast:t,createModal:n,createTabBar:r,createSwipeCards:i};return typeof window<`u`&&(window.Pocket=a),e.Pocket=a,e})({});
+      `}),e.addEventListener(`touchend`,()=>{if(t!==i)return;let o=r-n;if(o>120){c();return}if(o<-120){e.style.transition=`0.35s ease`,e.style.transform=`translateX(-1000px) rotate(-20deg)`,e.style.opacity=`0`,a.push(i),--i,setTimeout(s,250);return}e.style.transition=`0.35s ease`,s()})})}var a={createToast:t,createModal:n,createTabBar:r,createSwipeCards:i};return typeof window<`u`&&(window.Pocket=a),e.Pocket=a,e})({});

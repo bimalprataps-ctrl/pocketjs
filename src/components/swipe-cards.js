@@ -8,6 +8,7 @@ export function createSwipeCards(options = {}) {
   if (!root) return
 
   let activeIndex = cards.length - 1
+  const history = []
 
   root.classList.add('pocket-swipe-root')
 
@@ -26,17 +27,37 @@ export function createSwipeCards(options = {}) {
       if (depth < 0) {
         card.style.opacity = '0'
         card.style.pointerEvents = 'none'
+        card.style.transform = 'translateY(0) scale(1)'
         return
       }
 
       card.style.opacity = '1'
       card.style.zIndex = cards.length - depth
       card.style.pointerEvents = depth === 0 ? 'auto' : 'none'
+      card.style.transition = '0.3s ease'
 
       card.style.transform = `
         translateY(${depth * 34}px)
         scale(${1 - depth * 0.08})
       `
+    })
+  }
+
+  function restorePreviousCard() {
+    if (!history.length) return
+
+    const previousIndex = history.pop()
+    activeIndex = previousIndex
+
+    const card = cardElements[activeIndex]
+
+    card.style.transition = 'none'
+    card.style.opacity = '1'
+    card.style.transform = 'translateX(-1000px) rotate(-20deg)'
+
+    requestAnimationFrame(() => {
+      card.style.transition = '0.35s ease'
+      layoutCards()
     })
   }
 
@@ -71,21 +92,25 @@ export function createSwipeCards(options = {}) {
 
       const diff = currentX - startX
 
-      if (Math.abs(diff) > 120) {
+      if (diff > 120) {
+        restorePreviousCard()
+        return
+      }
+
+      if (diff < -120) {
         card.style.transition = '0.35s ease'
-        card.style.transform = `
-          translateX(${diff > 0 ? 1000 : -1000}px)
-          rotate(${diff > 0 ? 20 : -20}deg)
-        `
+        card.style.transform = 'translateX(-1000px) rotate(-20deg)'
         card.style.opacity = '0'
 
+        history.push(activeIndex)
         activeIndex -= 1
 
         setTimeout(layoutCards, 250)
-      } else {
-        card.style.transition = '0.35s ease'
-        layoutCards()
+        return
       }
+
+      card.style.transition = '0.35s ease'
+      layoutCards()
     })
   })
 }
