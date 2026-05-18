@@ -1,19 +1,75 @@
 {
   "name": "pocketjs",
-  "private": true,
   "version": "0.1.0",
+  "description": "A lightweight mobile interaction framework for bottom sheets, swipe cards, touch gestures, motion UI, and app-like web experiences.",
   "type": "module",
+
+  "main": "./dist/pocket.cjs.js",
+  "module": "./dist/pocket.es.js",
+  "types": "./dist/index.d.ts",
+
+  "exports": {
+    ".": {
+      "import": "./dist/pocket.es.js",
+      "require": "./dist/pocket.cjs.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+
+  "sideEffects": false,
+
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bimalprataps-ctrl/pocketjs.git"
+  },
+
+  "bugs": {
+    "url": "https://github.com/bimalprataps-ctrl/pocketjs/issues"
+  },
+
+  "homepage": "https://github.com/bimalprataps-ctrl/pocketjs#readme",
+
+  "keywords": [
+    "mobile-ui",
+    "gesture",
+    "touch",
+    "bottom-sheet",
+    "swipe-cards",
+    "motion-ui",
+    "physics",
+    "animation",
+    "spring",
+    "touch-gestures",
+    "interaction",
+    "ui-framework",
+    "mobile-framework",
+    "web-animation",
+    "app-like-ui",
+    "pointer-events"
+  ],
+
+  "author": "Bimal Pratap Shah",
+  "license": "MIT",
+
   "dependencies": {
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "typescript": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "typescript": "latest",
+    "vite": "latest"
   },
+
   "devDependencies": {}
 }
