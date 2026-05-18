@@ -5,8 +5,12 @@ export default defineConfig({
     lib: {
       entry: 'src/pocket.js',
       name: 'Pocket',
-      fileName: 'pocket',
-      formats: ['iife']
+      formats: ['es', 'cjs', 'iife'],
+      fileName: (format) => {
+        if (format === 'es') return 'pocket.es.js'
+        if (format === 'cjs') return 'pocket.cjs.js'
+        return 'pocket.iife.js'
+      }
     }
   }
 })
