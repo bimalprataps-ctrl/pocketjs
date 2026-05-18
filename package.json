@@ -27,7 +27,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
   },
 
   "repository": {
@@ -63,6 +65,10 @@
   "author": "Bimal Pratap Shah",
   "license": "MIT",
 
+  "engines": {
+    "node": ">=18"
+  },
+
   "dependencies": {
     "typescript": "latest",
     "vite": "latest"
@@ -70,3 +76,4 @@
 
   "devDependencies": {}
 }
+
