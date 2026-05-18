@@ -1,74 +1,186 @@
-export function createBottomSheet(config = {}) {
-  const sheetRoot = document.createElement('div')
+// src/bottomSheet.js
 
-  sheetRoot.innerHTML = `
-    <div class="pocket-overlay"></div>
+export function createBottomSheet({
+  trigger,
+  sheet,
+  backdrop,
+  snapPoints = ['peek', 'middle', 'full']
+}) {
+  const triggerEl = document.querySelector(trigger);
+  const sheetEl = document.querySelector(sheet);
+  const backdropEl = backdrop
+    ? document.querySelector(backdrop)
+    : null;
 
-    <section class="pocket-sheet">
-      <div class="pocket-handle"></div>
-
-      <h2>${config.title || 'Pocket Sheet'}</h2>
-
-      <p>
-        ${config.text || 'This is a native-feeling iOS bottom sheet built with PocketJS.'}
-      </p>
-
-      <button class="pocket-close">
-        Done
-      </button>
-    </section>
-  `
-
-  document.body.appendChild(sheetRoot)
-
-  const overlay = sheetRoot.querySelector('.pocket-overlay')
-  const sheet = sheetRoot.querySelector('.pocket-sheet')
-  const close = sheetRoot.querySelector('.pocket-close')
-
-  let startY = 0
-  let currentY = 0
-  let dragging = false
-
-  function closeSheet() {
-    sheet.style.transform = 'translateY(100%)'
-    overlay.style.opacity = '0'
-
-    setTimeout(() => {
-      sheetRoot.remove()
-    }, 220)
+  if (!triggerEl || !sheetEl) {
+    console.warn('PocketJS BottomSheet: Missing trigger or sheet');
+    return;
   }
 
-  sheet.addEventListener('pointerdown', (event) => {
-    dragging = true
-    startY = event.clientY
-    sheet.style.transition = 'none'
-  })
+  let current = 0;
 
-  window.addEventListener('pointermove', (event) => {
-    if (!dragging) return
+  const states = {
+    peek: 72,
+    middle: 38,
+    full: 0
+  };
 
-    currentY = event.clientY - startY
+  function setTransform(percent) {
+    sheetEl.style.transform = `translateY(${percent}%)`;
+  }
 
-    if (currentY > 0) {
-      sheet.style.transform = `translateY(${currentY}px)`
+  function applyState(index) {
+    current = index;
+
+    const key = snapPoints[index];
+
+    const value = states[key] ?? 72;
+
+    sheetEl.style.transition =
+      'transform 700ms cubic-bezier(0.22, 1, 0.36, 1)';
+
+    setTransform(value);
+
+    if (backdropEl) {
+      if (index === 0) {
+        backdropEl.style.opacity = '0';
+        backdropEl.style.pointerEvents = 'none';
+      } else {
+        backdropEl.style.opacity = '1';
+        backdropEl.style.pointerEvents = 'auto';
+      }
     }
-  })
+  }
 
-  window.addEventListener('pointerup', () => {
-    if (!dragging) return
+  // -----------------------
+  // OPEN BUTTON
+  // -----------------------
 
-    dragging = false
-    sheet.style.transition = 'transform .22s ease'
+  triggerEl.addEventListener('click', () => {
+    current = (current + 1) % snapPoints.length;
 
-    if (currentY > 120) {
-      closeSheet()
-    } else {
-      sheet.style.transform = 'translateY(0)'
+    applyState(current);
+  });
+
+  // -----------------------
+  // BACKDROP CLOSE
+  // -----------------------
+
+  if (backdropEl) {
+    backdropEl.addEventListener('click', () => {
+      current = 0;
+      applyState(0);
+    });
+  }
+
+  // -----------------------
+  // DRAG
+  // -----------------------
+
+  let startY = 0;
+  let deltaY = 0;
+  let dragging = false;
+
+  sheetEl.addEventListener('pointerdown', (e) => {
+    dragging = true;
+
+    startY = e.clientY;
+
+    deltaY = 0;
+
+    sheetEl.style.transition = 'none';
+
+    sheetEl.setPointerCapture(e.pointerId);
+  });
+
+  sheetEl.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+
+    deltaY = e.clientY - startY;
+
+    const base =
+      current === 0
+        ? states.peek
+        : current === 1
+          ? states.middle
+          : states.full;
+
+    const next = base + deltaY / 10;
+
+    setTransform(next);
+  });
+
+  function endDrag() {
+    if (!dragging) return;
+
+    dragging = false;
+
+    // Swipe UP
+    if (deltaY < -60) {
+      current = Math.min(current + 1, snapPoints.length - 1);
     }
 
-    currentY = 0
-  })
+    // Swipe DOWN
+    if (deltaY > 60) {
+      current = Math.max(current - 1, 0);
+    }
 
-  overlay.onclick = closeSheet
-  close.onclick = closeSheet
+    applyState(current);
+  }
+
+  sheetEl.addEventListener('pointerup', endDrag);
+  sheetEl.addEventListener('pointercancel', endDrag);
+
+  // -----------------------
+  // INITIAL STYLES
+  // -----------------------
+
+  sheetEl.style.willChange = 'transform';
+  sheetEl.style.touchAction = 'none';
+
+  if (backdropEl) {
+    backdropEl.style.transition = 'opacity 400ms ease';
+    backdropEl.style.opacity = '0';
+    backdropEl.style.pointerEvents = 'none';
+  }
+
+  // -----------------------
+  // INITIAL STATE
+  // -----------------------
+
+  applyState(0);
+
+  // -----------------------
+  // PUBLIC API
+  // -----------------------
+
+  return {
+    open() {
+      current = 2;
+      applyState(2);
+    },
+
+    close() {
+      current = 0;
+      applyState(0);
+    },
+
+    snap(index) {
+      current = Math.max(
+        0,
+        Math.min(index, snapPoints.length - 1)
+      );
+
+      applyState(current);
+    },
+
+    destroy() {
+      triggerEl.replaceWith(triggerEl.cloneNode(true));
+      sheetEl.replaceWith(sheetEl.cloneNode(true));
+
+      if (backdropEl) {
+        backdropEl.replaceWith(backdropEl.cloneNode(true));
+      }
+    }
+  };
 }
