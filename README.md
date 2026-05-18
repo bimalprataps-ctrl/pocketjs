@@ -1,5 +1,11 @@
 # POCKETJS
 
+![License](https://img.shields.io/badge/license-MIT-black)
+![Status](https://img.shields.io/badge/status-active-white)
+![Version](https://img.shields.io/badge/version-0.1.0-black)
+![Built With](https://img.shields.io/badge/built%20with-Vite-646CFF)
+
+
 A lightweight mobile interaction framework for bottom sheets, swipe cards, touch gestures, motion UI, and app-like web experiences across phones, tablets, and desktops.
 
 Built for modern interaction design.
