@@ -4,7 +4,16 @@ import { createTabBar } from './components/tab-bar.js'
 import { createSwipeCards } from './components/swipe-cards.js'
 import { createBottomSheet } from './components/bottom-sheet.js'
 
-export const Pocket = {
+const Pocket = {
+  createToast,
+  createModal,
+  createTabBar,
+  createSwipeCards,
+  createBottomSheet
+}
+
+export {
+  Pocket,
   createToast,
   createModal,
   createTabBar,
