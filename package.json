@@ -74,6 +74,10 @@
     "vite": "latest"
   },
 
-  "devDependencies": {}
-}
+   "dependencies": {},
 
+  "devDependencies": {
+    "typescript": "latest",
+    "vite": "latest"
+  }
+}
