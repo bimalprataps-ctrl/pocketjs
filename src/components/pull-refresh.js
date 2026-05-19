@@ -1,59 +1,185 @@
 export function createPullToRefresh(options = {}) {
   const {
     threshold = 80,
-    onRefresh = async () => {}
-  } = options
+    maxDistance = 120,
+    onRefresh = async () => {},
+    container = window
+  } = options;
 
-  let startY = 0
-  let distance = 0
-  let isPulling = false
+  const listeners = new Map();
 
-  const indicator = document.createElement('div')
-  indicator.className = 'pocket-pull-refresh'
-  indicator.textContent = 'Pull to refresh'
-  document.body.appendChild(indicator)
+  let startY = 0;
+  let distance = 0;
+  let pulling = false;
+  let refreshing = false;
+  let destroyed = false;
 
-  window.addEventListener('touchstart', (event) => {
-    if (window.scrollY !== 0) return
+  const indicator = document.createElement('div');
 
-    startY = event.touches[0].clientY
-    isPulling = true
-  })
+  indicator.className = 'pocket-pull-refresh';
+  indicator.textContent = 'Pull to refresh';
 
-  window.addEventListener('touchmove', (event) => {
-    if (!isPulling) return
+  document.body.appendChild(indicator);
 
-    distance = event.touches[0].clientY - startY
+  function emit(eventName, detail = {}) {
+    listeners.get(eventName)?.forEach((callback) => {
+      callback({
+        type: eventName,
+        detail,
+        target: indicator
+      });
+    });
+  }
 
-    if (distance <= 0) return
+  function on(eventName, callback) {
+    if (!listeners.has(eventName)) {
+      listeners.set(eventName, new Set());
+    }
 
-    indicator.classList.add('visible')
-    indicator.style.transform = `translateX(-50%) translateY(${Math.min(distance, 100)}px)`
+    listeners.get(eventName).add(callback);
 
-    indicator.textContent = distance > threshold
-      ? 'Release to refresh'
-      : 'Pull to refresh'
-  })
+    return () => off(eventName, callback);
+  }
 
-  window.addEventListener('touchend', async () => {
-    if (!isPulling) return
+  function off(eventName, callback) {
+    listeners.get(eventName)?.delete(callback);
+  }
+
+  function setDistance(value) {
+    distance = Math.min(value, maxDistance);
+
+    indicator.style.transform =
+      `translateX(-50%) translateY(${distance}px)`;
+  }
+
+  function reset() {
+    indicator.classList.remove('visible');
+
+    indicator.style.transform =
+      'translateX(-50%) translateY(0px)';
+
+    indicator.textContent = 'Pull to refresh';
+
+    startY = 0;
+    distance = 0;
+    pulling = false;
+    refreshing = false;
+
+    emit('reset');
+  }
+
+  async function refresh() {
+    if (refreshing || destroyed) return;
+
+    refreshing = true;
+
+    indicator.textContent = 'Refreshing...';
+
+    emit('refreshstart');
+
+    try {
+      await onRefresh();
+
+      emit('refresh');
+    } catch (error) {
+      emit('error', { error });
+      console.error(error);
+    }
+
+    reset();
+  }
+
+  function handleTouchStart(event) {
+    if (destroyed) return;
+
+    if (window.scrollY !== 0) return;
+
+    startY = event.touches[0].clientY;
+    pulling = true;
+
+    emit('pullstart');
+  }
+
+  function handleTouchMove(event) {
+    if (!pulling || destroyed || refreshing) return;
+
+    const currentY = event.touches[0].clientY;
+
+    distance = currentY - startY;
+
+    if (distance <= 0) return;
+
+    indicator.classList.add('visible');
+
+    setDistance(distance);
+
+    indicator.textContent =
+      distance > threshold
+        ? 'Release to refresh'
+        : 'Pull to refresh';
+
+    emit('pull', { distance });
+  }
+
+  async function handleTouchEnd() {
+    if (!pulling || destroyed) return;
+
+    emit('pullend', { distance });
 
     if (distance > threshold) {
-      indicator.textContent = 'Refreshing...'
-      await onRefresh()
+      await refresh();
+      return;
     }
 
-    indicator.classList.remove('visible')
-    indicator.style.transform = 'translateX(-50%) translateY(0px)'
+    reset();
+  }
 
-    startY = 0
-    distance = 0
-    isPulling = false
-  })
+  function open() {
+    indicator.classList.add('visible');
+  }
+
+  function close() {
+    reset();
+  }
+
+  function toggle() {
+    indicator.classList.contains('visible')
+      ? close()
+      : open();
+  }
+
+  function destroy() {
+    if (destroyed) return;
+
+    destroyed = true;
+
+    container.removeEventListener('touchstart', handleTouchStart);
+    container.removeEventListener('touchmove', handleTouchMove);
+    container.removeEventListener('touchend', handleTouchEnd);
+
+    listeners.clear();
+
+    indicator.remove();
+  }
+
+  container.addEventListener('touchstart', handleTouchStart, {
+    passive: true
+  });
+
+  container.addEventListener('touchmove', handleTouchMove, {
+    passive: true
+  });
+
+  container.addEventListener('touchend', handleTouchEnd);
 
   return {
-    destroy() {
-      indicator.remove()
-    }
-  }
+    open,
+    close,
+    toggle,
+    refresh,
+    destroy,
+    on,
+    off,
+    el: indicator
+  };
 }
