@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PocketJS Motion UI</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f6f4ef;
+      color: #111;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    main {
+      width: min(460px, 92vw);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 52px;
+      letter-spacing: -0.07em;
+      margin: 0 0 10px;
+    }
+
+    p {
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 32px;
+    }
+
+    .stage {
+      height: 440px;
+      border-radius: 38px;
+      background: #fff;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.12);
+      display: grid;
+      place-items: center;
+      touch-action: none;
+      overflow: hidden;
+    }
+
+    .tile {
+      width: 190px;
+      height: 190px;
+      border-radius: 42px;
+      background: #111;
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      will-change: transform;
+      transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .tile:active {
+      cursor: grabbing;
+    }
+
+    .controls {
+      margin-top: 22px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 18px;
+      background: #111;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: #e8e3d8;
+      color: #111;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>Motion UI</h1>
+    <p>Tap, drag, release. A simple motion playground for PocketJS physics.</p>
+
+    <div class="stage">
+      <div class="tile" id="tile">Drag me</div>
+    </div>
+
+    <div class="controls">
+      <button id="popBtn">Pop</button>
+      <button class="secondary" id="resetBtn">Reset</button>
+    </div>
+  </main>
+
+  <script>
+    const tile = document.querySelector('#tile');
+    const popBtn = document.querySelector('#popBtn');
+    const resetBtn = document.querySelector('#resetBtn');
+
+    let dragging = false;
+    let startX = 0;
+    let startY = 0;
+    let x = 0;
+    let y = 0;
+
+    function render(scale = 1, rotate = 0) {
+      tile.style.transform = `
+        translate(${x}px, ${y}px)
+        scale(${scale})
+        rotate(${rotate}deg)
+      `;
+    }
+
+    tile.addEventListener('pointerdown', (event) => {
+      dragging = true;
+
+      startX = event.clientX - x;
+      startY = event.clientY - y;
+
+      tile.setPointerCapture(event.pointerId);
+      tile.style.transition = 'none';
+
+      render(0.96, 0);
+    });
+
+    tile.addEventListener('pointermove', (event) => {
+      if (!dragging) return;
+
+      x = event.clientX - startX;
+      y = event.clientY - startY;
+
+      render(1, x * 0.03);
+    });
+
+    function release() {
+      if (!dragging) return;
+
+      dragging = false;
+
+      x = 0;
+      y = 0;
+
+      tile.style.transition =
+        'transform 650ms cubic-bezier(0.22, 1, 0.36, 1)';
+
+      render(1, 0);
+    }
+
+    tile.addEventListener('pointerup', release);
+    tile.addEventListener('pointercancel', release);
+
+    popBtn.addEventListener('click', () => {
+      x = 0;
+      y = 0;
+
+      tile.style.transition =
+        'transform 420ms cubic-bezier(0.16, 1, 0.3, 1)';
+
+      render(1.18, -3);
+
+      setTimeout(() => {
+        render(1, 0);
+      }, 180);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      x = 0;
+      y = 0;
+      tile.style.transition =
+        'transform 500ms cubic-bezier(0.22, 1, 0.36, 1)';
+      render(1, 0);
+    });
+  </script>
+</body>
+</html>
