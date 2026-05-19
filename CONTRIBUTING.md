@@ -1,8 +1,8 @@
-# Contributing to PocketJS
+# Contributing to Pocket Touch
 
-Thank you for contributing to PocketJS.
+Thank you for contributing to Pocket Touch.
 
-PocketJS is focused on building modern touch-first interaction systems for the web.
+Pocket Touch is focused on building modern touch-first interaction systems for the web.
 
 ---
 
@@ -11,5 +11,5 @@ PocketJS is focused on building modern touch-first interaction systems for the w
 ## Clone Repository
 
 ```bash
-git clone https://github.com/bimalprataps-ctrl/pocketjs.git
-cd pocketjs
+git clone https://github.com/bimalprataps-ctrl/pocket-touch.git
+cd pocket-touch

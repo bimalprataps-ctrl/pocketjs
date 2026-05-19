@@ -7,7 +7,7 @@ docs/installation.md
 ````md
 # Installation
 
-PocketJS can be installed using npm or loaded directly through a CDN.
+Pocket Touch can be installed using npm or loaded directly through a CDN.
 
 The framework is designed for lightweight browser-based interaction systems and touch-first web interfaces.
 
@@ -15,17 +15,17 @@ The framework is designed for lightweight browser-based interaction systems and 
 
 ## npm
 
-Install PocketJS using npm:
+Install Pocket Touch using npm:
 
 ```bash
-npm install pocketjs
+npm install pocket-touch
 ```
 
 ---
 
 ## Importing
 
-PocketJS exports its components from:
+Pocket Touch exports its components from:
 
 ```text
 src/pocket.js
@@ -34,20 +34,20 @@ src/pocket.js
 Example:
 
 ```js
-import Pocket from 'pocketjs'
+import Pocket from 'pocket-touch'
 ```
 
 ---
 
 ## CDN
 
-Use PocketJS directly in the browser without a build step:
+Use Pocket Touch directly in the browser without a build step:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocketjs@main/dist/pocket.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocket-touch@main/dist/pocket.iife.js"></script>
 ```
 
-PocketJS will be available globally as:
+Pocket Touch will be available globally as:
 
 ```js
 Pocket
@@ -62,13 +62,13 @@ Pocket
   Show Toast
 </button>
 
-<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocketjs@main/dist/pocket.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocket-touch@main/dist/pocket.iife.js"></script>
 
 <script>
 document.querySelector('#showToast').onclick = () => {
 
   Pocket.createToast({
-    message: 'PocketJS loaded successfully'
+    message: 'Pocket Touch loaded successfully'
   })
 
 }
@@ -79,7 +79,7 @@ document.querySelector('#showToast').onclick = () => {
 
 ## Available Components
 
-PocketJS currently includes:
+Pocket Touch currently includes:
 
 ```text
 createActionSheet()
@@ -99,13 +99,13 @@ createToast()
 Clone the repository:
 
 ```bash
-git clone https://github.com/bimalprataps-ctrl/pocketjs
+git clone https://github.com/bimalprataps-ctrl/pocket-touch
 ```
 
 Move into the project:
 
 ```bash
-cd pocketjs
+cd pocket-touch
 ```
 
 Install dependencies:
@@ -136,7 +136,7 @@ npm run preview
 
 ## Project Structure
 
-PocketJS is organized into:
+Pocket Touch is organized into:
 
 ```text
 src/components/
@@ -181,7 +181,7 @@ Contains component and motion styles.
 
 ## Browser Support
 
-PocketJS supports modern browsers:
+Pocket Touch supports modern browsers:
 
 | Browser | Supported |
 |---|---|

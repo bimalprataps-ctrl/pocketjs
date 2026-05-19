@@ -1,6 +1,6 @@
 # Tabs
 
-PocketJS includes a lightweight tabs component for building switchable content interfaces.
+Pocket Touch includes a lightweight tabs component for building switchable content interfaces.
 
 Tabs are useful for:
 - segmented interfaces
@@ -32,7 +32,7 @@ Pocket.createTabs({
 ```html
 <div id="tabs"></div>
 
-<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocketjs@main/dist/pocket.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocket-touch@main/dist/pocket.iife.js"></script>
 
 <script>
 Pocket.createTabs({
@@ -47,7 +47,7 @@ Pocket.createTabs({
 
       content: `
         <h2>Home</h2>
-        <p>Welcome to PocketJS.</p>
+        <p>Welcome to Pocket Touch.</p>
       `
     },
 
@@ -121,7 +121,7 @@ The container can be:
 
 ## Active Tabs
 
-PocketJS automatically handles:
+Pocket Touch automatically handles:
 - active state switching
 - active classes
 - content replacement
@@ -180,7 +180,7 @@ tabs.setActive(1);
 
 ## Generated Structure
 
-PocketJS automatically creates:
+Pocket Touch automatically creates:
 
 ```html
 <div class="pocket-tabs">
@@ -243,7 +243,7 @@ PocketJS automatically creates:
 
 ## Notes
 
-PocketJS tabs are designed for lightweight browser-based interfaces and touch-first layouts.
+Pocket Touch tabs are designed for lightweight browser-based interfaces and touch-first layouts.
 
 The component dynamically updates panel content using HTML strings.
 

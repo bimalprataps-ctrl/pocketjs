@@ -1,6 +1,6 @@
 # Motion UI
 
-PocketJS includes lightweight motion systems for building fluid, tactile, and cinematic interfaces.
+Pocket Touch includes lightweight motion systems for building fluid, tactile, and cinematic interfaces.
 
 The framework focuses on motion that feels:
 - responsive
@@ -9,13 +9,13 @@ The framework focuses on motion that feels:
 - touch-first
 - interaction-driven
 
-PocketJS uses transform-based animation and lightweight physics systems to create smoother UI movement.
+Pocket Touch uses transform-based animation and lightweight physics systems to create smoother UI movement.
 
 ---
 
 ## Motion Systems
 
-PocketJS motion systems are powered internally by:
+Pocket Touch motion systems are powered internally by:
 
 ```text
 src/core/animation-engine.js
@@ -34,7 +34,7 @@ These systems handle:
 
 ## Design Philosophy
 
-PocketJS motion is designed around:
+Pocket Touch motion is designed around:
 - touch-first interaction
 - physical movement
 - cinematic flow
@@ -47,7 +47,7 @@ The framework prioritizes motion that feels natural instead of overly mechanical
 
 ## Motion In Components
 
-PocketJS motion systems are used throughout:
+Pocket Touch motion systems are used throughout:
 - swipe cards
 - bottom sheets
 - pull to refresh
@@ -117,7 +117,7 @@ Using transform-based animation improves GPU acceleration and interaction smooth
 
 ## Performance Notes
 
-PocketJS motion systems are optimized for:
+Pocket Touch motion systems are optimized for:
 - mobile GPUs
 - touch rendering pipelines
 - layered interaction systems
@@ -133,7 +133,7 @@ For best results:
 
 ## Physical Motion
 
-PocketJS includes lightweight physics helpers through:
+Pocket Touch includes lightweight physics helpers through:
 
 ```text
 src/core/spring-physics.js
@@ -150,7 +150,7 @@ These systems help create:
 
 ## Browser Support
 
-PocketJS motion systems support:
+Pocket Touch motion systems support:
 - Chrome
 - Safari
 - Firefox

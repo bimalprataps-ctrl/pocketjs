@@ -1,6 +1,6 @@
 # Getting Started
 
-PocketJS is a lightweight interaction framework for building touch-first web interfaces.
+Pocket Touch is a lightweight interaction framework for building touch-first web interfaces.
 
 The framework provides browser components for:
 - swipe cards
@@ -12,7 +12,7 @@ The framework provides browser components for:
 - toast notifications
 - mobile interaction systems
 
-PocketJS is designed for:
+Pocket Touch is designed for:
 - mobile UI
 - app-like layouts
 - touch-first interfaces
@@ -23,16 +23,16 @@ PocketJS is designed for:
 
 ## Installation
 
-Install PocketJS using npm:
+Install Pocket Touch using npm:
 
 ```bash
-npm install pocketjs
+npm install pocket-touch
 ```
 
 Or load it directly through the CDN build:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocketjs@main/dist/pocket.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocket-touch@main/dist/pocket.iife.js"></script>
 ```
 
 ---
@@ -46,13 +46,13 @@ Create a simple toast notification:
   Show Toast
 </button>
 
-<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocketjs@main/dist/pocket.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocket-touch@main/dist/pocket.iife.js"></script>
 
 <script>
 document.querySelector('#showToast').onclick = () => {
 
   Pocket.createToast({
-    message: 'PocketJS is working'
+    message: 'Pocket Touch is working'
   })
 
 }
@@ -127,7 +127,7 @@ Pocket.createBottomSheet({
 
 ## Available Components
 
-PocketJS currently includes:
+Pocket Touch currently includes:
 
 | Component | Description |
 |---|---|
@@ -144,7 +144,7 @@ PocketJS currently includes:
 
 ## Mobile-First Design
 
-PocketJS is designed primarily for:
+Pocket Touch is designed primarily for:
 - touch devices
 - mobile browsers
 - tablets
@@ -157,7 +157,7 @@ The framework focuses on lightweight browser-based interaction patterns.
 
 ## Core Architecture
 
-PocketJS includes internal systems for:
+Pocket Touch includes internal systems for:
 - pointer interactions
 - spring physics
 - velocity calculations
@@ -177,7 +177,7 @@ src/core/velocity.js
 
 ## Browser Support
 
-PocketJS supports modern browsers:
+Pocket Touch supports modern browsers:
 
 | Browser | Supported |
 |---|---|

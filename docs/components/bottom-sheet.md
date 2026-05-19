@@ -7,7 +7,7 @@ docs/components/bottom-sheet.md
 ````md
 # Bottom Sheet
 
-PocketJS includes a lightweight bottom sheet component for building mobile-style layered interfaces.
+Pocket Touch includes a lightweight bottom sheet component for building mobile-style layered interfaces.
 
 Bottom sheets are useful for menus, media controls, action panels, settings panels, and app-like navigation layers.
 
@@ -37,10 +37,10 @@ Pocket.createBottomSheet({
 
 <div id="sheet">
   <h2>Bottom Sheet</h2>
-  <p>This is a PocketJS bottom sheet.</p>
+  <p>This is a Pocket Touch bottom sheet.</p>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocketjs@main/dist/pocket.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocket-touch@main/dist/pocket.iife.js"></script>
 
 <script>
   const sheet = Pocket.createBottomSheet({
@@ -67,7 +67,7 @@ Pocket.createBottomSheet({
 
 ## Snap Points
 
-PocketJS supports three built-in snap positions:
+Pocket Touch supports three built-in snap positions:
 
 | Snap Point | Behavior |
 |---|---|
@@ -184,7 +184,7 @@ The component uses:
 
 ## Notes
 
-If the `trigger` or `sheet` selector cannot be found, PocketJS will warn in the console and stop initialization.
+If the `trigger` or `sheet` selector cannot be found, Pocket Touch will warn in the console and stop initialization.
 
 The bottom sheet is currently designed as a lightweight browser component, especially useful for mobile prototypes, demos, and app-like web interfaces.
 

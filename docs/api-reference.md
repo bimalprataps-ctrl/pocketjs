@@ -7,7 +7,7 @@ docs/api-reference.md
 ````md
 # API Reference
 
-PocketJS provides lightweight browser components for building touch-first, app-like web interfaces.
+Pocket Touch provides lightweight browser components for building touch-first, app-like web interfaces.
 
 The current public API includes:
 
@@ -76,8 +76,8 @@ Creates a modal dynamically and appends it to `document.body`.
 
 ```js
 const modal = Pocket.createModal({
-  title: 'PocketJS',
-  content: '<p>Hello from PocketJS.</p>'
+  title: 'Pocket Touch',
+  content: '<p>Hello from Pocket Touch.</p>'
 })
 ```
 
@@ -262,21 +262,21 @@ src/components/toast.js
 
 ## Importing
 
-PocketJS is available globally through the IIFE build:
+Pocket Touch is available globally through the IIFE build:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocketjs@main/dist/pocket.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocket-touch@main/dist/pocket.iife.js"></script>
 ```
 
 Then use:
 
 ```js
 Pocket.createToast({
-  message: 'Hello PocketJS'
+  message: 'Hello Pocket Touch'
 })
 ```
 
-PocketJS also exports modules from:
+Pocket Touch also exports modules from:
 
 ```text
 src/pocket.js
@@ -286,7 +286,7 @@ src/pocket.js
 
 ## Core Internals
 
-PocketJS also includes internal systems for interaction and motion behavior:
+Pocket Touch also includes internal systems for interaction and motion behavior:
 
 ```text
 src/core/animation-engine.js

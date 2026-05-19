@@ -1,6 +1,6 @@
 # Modal
 
-PocketJS includes a lightweight modal component for building layered dialog interfaces and focused interaction flows.
+Pocket Touch includes a lightweight modal component for building layered dialog interfaces and focused interaction flows.
 
 The modal component dynamically creates:
 - overlay layers
@@ -22,7 +22,7 @@ Designed for:
 
 ```js
 Pocket.createModal({
-  title: 'PocketJS',
+  title: 'Pocket Touch',
   content: `
     <p>
       Lightweight interaction framework.
@@ -40,14 +40,14 @@ Pocket.createModal({
   Open Modal
 </button>
 
-<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocketjs@main/dist/pocket.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocket-touch@main/dist/pocket.iife.js"></script>
 
 <script>
 document.querySelector('#openModal').onclick = () => {
 
   Pocket.createModal({
 
-    title: 'PocketJS',
+    title: 'Pocket Touch',
 
     content: `
       <p>
@@ -73,7 +73,7 @@ document.querySelector('#openModal').onclick = () => {
 
 ## Dynamic Rendering
 
-PocketJS modals are dynamically inserted into the document body.
+Pocket Touch modals are dynamically inserted into the document body.
 
 The component automatically creates:
 - overlay

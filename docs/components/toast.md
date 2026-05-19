@@ -1,6 +1,6 @@
 # Toast
 
-PocketJS includes a lightweight toast component for displaying temporary notification messages.
+Pocket Touch includes a lightweight toast component for displaying temporary notification messages.
 
 Toasts are useful for:
 - status messages
@@ -18,7 +18,7 @@ The component dynamically creates and removes toast elements automatically.
 
 ```js
 Pocket.createToast({
-  message: 'PocketJS toast',
+  message: 'Pocket Touch toast',
   duration: 2500,
   position: 'bottom'
 });
@@ -33,7 +33,7 @@ Pocket.createToast({
   Show Toast
 </button>
 
-<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocketjs@main/dist/pocket.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocket-touch@main/dist/pocket.iife.js"></script>
 
 <script>
 document.querySelector('#showToast').onclick = () => {
@@ -58,7 +58,7 @@ document.querySelector('#showToast').onclick = () => {
 
 | Option | Type | Default | Description |
 |---|---|---|---|
-| `message` | string | `'PocketJS toast'` | Toast message |
+| `message` | string | `'Pocket Touch toast'` | Toast message |
 | `duration` | number | `2500` | Display duration in milliseconds |
 | `position` | string | `'bottom'` | Toast position |
 
@@ -66,7 +66,7 @@ document.querySelector('#showToast').onclick = () => {
 
 ## Positions
 
-PocketJS currently supports position-based classes:
+Pocket Touch currently supports position-based classes:
 
 ```js
 position: 'bottom'
@@ -84,7 +84,7 @@ Additional positions can be styled through CSS.
 
 ## Behavior
 
-PocketJS toasts:
+Pocket Touch toasts:
 - dynamically create a toast element
 - append it to `document.body`
 - animate into view
@@ -114,7 +114,7 @@ const toast = Pocket.createToast({
 
 ## Generated Structure
 
-PocketJS automatically creates:
+Pocket Touch automatically creates:
 
 ```html
 <div class="pocket-toast pocket-toast-bottom show">
@@ -174,7 +174,7 @@ The toast is appended to `document.body`.
 
 ## Notes
 
-PocketJS toasts are intentionally lightweight and designed for:
+Pocket Touch toasts are intentionally lightweight and designed for:
 - mobile interfaces
 - interaction feedback
 - app-like experiences

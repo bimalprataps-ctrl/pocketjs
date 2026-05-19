@@ -7,7 +7,7 @@ docs/components/swipe-cards.md
 ````md
 # Swipe Cards
 
-PocketJS includes a lightweight swipe card component for building touch-first stacked interfaces.
+Pocket Touch includes a lightweight swipe card component for building touch-first stacked interfaces.
 
 Swipe cards are useful for:
 - onboarding flows
@@ -37,7 +37,7 @@ Pocket.createSwipeCards({
 ```html
 <div id="cards"></div>
 
-<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocketjs@main/dist/pocket.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocket-touch@main/dist/pocket.iife.js"></script>
 
 <script>
 Pocket.createSwipeCards({
@@ -103,7 +103,7 @@ The `content` value accepts HTML strings.
 
 ## Swipe Behavior
 
-PocketJS swipe cards support:
+Pocket Touch swipe cards support:
 - pointer dragging
 - touch gestures
 - swipe momentum
@@ -179,7 +179,7 @@ The interaction system uses pointer events for cross-device compatibility.
 
 ## Notes
 
-PocketJS swipe cards are intentionally lightweight and focused on interaction simplicity.
+Pocket Touch swipe cards are intentionally lightweight and focused on interaction simplicity.
 
 The component is best suited for:
 - UI demos

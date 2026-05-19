@@ -3,7 +3,7 @@ import { Pocket } from './pocket.js'
 
 document.querySelector('#app').innerHTML = `
   <main>
-    <h1>PocketJS</h1>
+    <h1>Pocket Touch</h1>
 
     <button id="toastBtn">Show Toast</button>
     <button id="modalBtn">Show Modal</button>
@@ -14,13 +14,13 @@ document.querySelector('#app').innerHTML = `
 
 document.querySelector('#toastBtn').onclick = () => {
   Pocket.createToast({
-    message: 'PocketJS is running'
+    message: 'Pocket Touch is running'
   })
 }
 
 document.querySelector('#modalBtn').onclick = () => {
   Pocket.createModal({
-    title: 'PocketJS Modal',
+    title: 'Pocket Touch Modal',
     content: '<p>Modal working properly.</p>'
   })
 }
@@ -29,7 +29,7 @@ Pocket.createSwipeCards({
   container: '#swipeDemo',
   cards: [
     { content: 'Swipe me' },
-    { content: 'PocketJS' },
+    { content: 'Pocket Touch' },
     { content: 'Mobile UI' }
   ]
 })

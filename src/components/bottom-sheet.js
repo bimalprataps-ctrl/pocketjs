@@ -13,7 +13,7 @@ export function createBottomSheet({
     : null;
 
   if (!triggerEl || !sheetEl) {
-    console.warn('PocketJS BottomSheet: Missing trigger or sheet');
+    console.warn('Pocket Touch BottomSheet: Missing trigger or sheet');
     return;
   }
 

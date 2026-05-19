@@ -1,6 +1,6 @@
 # Gesture Handling
 
-PocketJS includes low-level gesture and pointer interaction systems for building touch-first interfaces across mobile and desktop devices.
+Pocket Touch includes low-level gesture and pointer interaction systems for building touch-first interfaces across mobile and desktop devices.
 
 The framework uses pointer events internally to support:
 - dragging
@@ -10,13 +10,13 @@ The framework uses pointer events internally to support:
 - mobile gestures
 - tactile UI behavior
 
-PocketJS gesture systems are designed for fluid interaction and transform-based motion.
+Pocket Touch gesture systems are designed for fluid interaction and transform-based motion.
 
 ---
 
 ## Pointer Engine
 
-PocketJS uses a lightweight internal pointer engine located in:
+Pocket Touch uses a lightweight internal pointer engine located in:
 
 ```text
 src/core/pointer-engine.js
@@ -33,7 +33,7 @@ The gesture system powers:
 
 ## Supported Interactions
 
-PocketJS gesture handling supports:
+Pocket Touch gesture handling supports:
 - pointer events
 - touch interactions
 - mouse dragging
@@ -92,7 +92,7 @@ Users can:
 
 ## Pull Interactions
 
-PocketJS also includes pull-based interaction systems through:
+Pocket Touch also includes pull-based interaction systems through:
 
 ```text
 src/components/pull-refresh.js
@@ -108,7 +108,7 @@ These interactions are useful for:
 
 ## Touch Behavior
 
-PocketJS gesture systems are optimized for:
+Pocket Touch gesture systems are optimized for:
 - phones
 - tablets
 - touch laptops
@@ -140,7 +140,7 @@ This improves interaction smoothness and prevents unwanted browser gestures.
 
 ## Performance Notes
 
-PocketJS gesture systems are designed around:
+Pocket Touch gesture systems are designed around:
 - transform-based movement
 - hardware acceleration
 - lightweight pointer tracking

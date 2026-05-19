@@ -1,6 +1,6 @@
 export function createToast(options = {}) {
   const {
-    message = 'PocketJS toast',
+    message = 'Pocket Touch toast',
     duration = 2500,
     position = 'bottom'
   } = options

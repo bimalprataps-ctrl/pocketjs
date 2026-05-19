@@ -1,10 +1,9 @@
-# POCKETJS
+# Pocket Touch
 
 ![License](https://img.shields.io/badge/license-MIT-black)
 ![Status](https://img.shields.io/badge/status-active-white)
 ![Version](https://img.shields.io/badge/version-0.1.0-black)
 ![Built With](https://img.shields.io/badge/built%20with-Vite-646CFF)
-
 
 A lightweight mobile interaction framework for bottom sheets, swipe cards, touch gestures, motion UI, and app-like web experiences across phones, tablets, and desktops.
 
@@ -12,13 +11,14 @@ Built for modern interaction design.
 
 ---
 
-## Why PocketJS
+## Why Pocket Touch
 
 Most web UI frameworks are still designed around desktop interaction patterns.
 
-PocketJS is built differently.
+Pocket Touch is built differently.
 
-PocketJS focuses on:
+Pocket Touch focuses on:
+
 - touch-first interaction
 - gesture-driven interfaces
 - cinematic motion systems
@@ -57,4 +57,4 @@ Build web experiences that feel native, fluid, and alive.
 ## NPM
 
 ```bash
-npm install pocketjs
+npm install pocket-touch

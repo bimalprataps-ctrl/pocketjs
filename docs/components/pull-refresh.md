@@ -7,7 +7,7 @@ docs/components/pull-refresh.md
 ````md
 # Pull To Refresh
 
-PocketJS includes a lightweight pull-to-refresh component for mobile-first web interfaces.
+Pocket Touch includes a lightweight pull-to-refresh component for mobile-first web interfaces.
 
 It creates a refresh indicator, tracks vertical touch movement, and runs a custom refresh function when the user pulls past a threshold.
 
@@ -27,7 +27,7 @@ Pocket.createPullToRefresh({
 ## Basic Example
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocketjs@main/dist/pocket.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bimalprataps-ctrl/pocket-touch@main/dist/pocket.iife.js"></script>
 
 <script>
 Pocket.createPullToRefresh({
@@ -91,7 +91,7 @@ refresh.destroy();
 
 ## Generated Element
 
-PocketJS automatically creates this element:
+Pocket Touch automatically creates this element:
 
 ```html
 <div class="pocket-pull-refresh">

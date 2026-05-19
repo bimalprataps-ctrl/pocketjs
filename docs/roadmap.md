@@ -1,8 +1,8 @@
-# PocketJS Roadmap
+# Pocket Touch Roadmap
 
 ## Vision
 
-PocketJS aims to become a modern interaction engine for touch-first web experiences.
+Pocket Touch aims to become a modern interaction engine for touch-first web experiences.
 
 The goal is to provide:
 - cinematic motion
@@ -96,7 +96,7 @@ Future adapters:
 - Solid
 - Web Components
 
-PocketJS core will remain framework agnostic.
+Pocket Touch core will remain framework agnostic.
 
 ---
 
@@ -114,7 +114,7 @@ Planned demos:
 
 # Long-Term Direction
 
-PocketJS is designed around the belief that:
+Pocket Touch is designed around the belief that:
 the future web will feel increasingly physical, animated, and touch-native.
 
 The framework focuses on interaction as a first-class system rather than static UI widgets.
