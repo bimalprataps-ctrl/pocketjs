@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>PocketJS Music Player</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #ffffff 0%, #ece8df 100%);
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      color: #111;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .player {
+      width: min(420px, 92vw);
+      border-radius: 42px;
+      padding: 24px;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(24px);
+      box-shadow:
+        0 30px 90px rgba(0,0,0,0.14);
+    }
+
+    .cover {
+      aspect-ratio: 1;
+      border-radius: 32px;
+      overflow: hidden;
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    .cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .meta {
+      margin-bottom: 24px;
+    }
+
+    .meta h1 {
+      margin: 0 0 8px;
+      font-size: 36px;
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+    }
+
+    .meta p {
+      margin: 0;
+      color: rgba(17,17,17,0.6);
+      font-size: 16px;
+    }
+
+    .progress {
+      height: 6px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .progress-bar {
+      width: 32%;
+      height: 100%;
+      background: #111;
+      border-radius: inherit;
+      transition: width 300ms ease;
+    }
+
+    .times {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: rgba(17,17,17,0.5);
+      margin-bottom: 28px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .control {
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      font-size: 20px;
+      color: #111;
+    }
+
+    .play {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 0;
+      background: #111;
+      color: white;
+      font-size: 26px;
+      cursor: pointer;
+      box-shadow:
+        0 12px 30px rgba(0,0,0,0.18);
+    }
+
+    .playlist {
+      margin-top: 28px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .track {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(0,0,0,0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 220ms ease;
+      cursor: pointer;
+    }
+
+    .track:hover {
+      background: rgba(0,0,0,0.08);
+    }
+
+    .track strong {
+      display: block;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+    }
+
+    .track span {
+      font-size: 13px;
+      color: rgba(17,17,17,0.55);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="player">
+    <div class="cover">
+      <img
+        src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop"
+        alt=""
+      />
+    </div>
+
+    <div class="meta">
+      <h1>Midnight Motion</h1>
+      <p>PocketJS Audio Lab</p>
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="times">
+      <span id="currentTime">1:12</span>
+      <span>3:48</span>
+    </div>
+
+    <div class="controls">
+      <button class="control">⏮</button>
+
+      <button class="play" id="playBtn">
+        ▶
+      </button>
+
+      <button class="control">⏭</button>
+    </div>
+
+    <div class="playlist">
+      <div class="track">
+        <div>
+          <strong>Gesture Dreams</strong>
+          <span>3:48</span>
+        </div>
+
+        <span>▶</span>
+      </div>
+
+      <div class="track">
+        <div>
+          <strong>Physics Layer</strong>
+          <span>4:02</span>
+        </div>
+
+        <span>▶</span>
+      </div>
+
+      <div class="track">
+        <div>
+          <strong>Touch Horizon</strong>
+          <span>2:59</span>
+        </div>
+
+        <span>▶</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const playBtn = document.querySelector('#playBtn');
+    const progressBar = document.querySelector('#progressBar');
+    const currentTime = document.querySelector('#currentTime');
+
+    let playing = false;
+    let progress = 32;
+    let timer;
+
+    function startPlayback() {
+      timer = setInterval(() => {
+        progress += 1;
+
+        if (progress >= 100) {
+          progress = 0;
+        }
+
+        progressBar.style.width = `${progress}%`;
+
+        const seconds = Math.floor((progress / 100) * 228);
+
+        const mins = Math.floor(seconds / 60);
+        const secs = String(seconds % 60).padStart(2, '0');
+
+        currentTime.textContent = `${mins}:${secs}`;
+      }, 300);
+    }
+
+    playBtn.addEventListener('click', () => {
+      playing = !playing;
+
+      if (playing) {
+        playBtn.textContent = '❚❚';
+        startPlayback();
+      } else {
+        playBtn.textContent = '▶';
+        clearInterval(timer);
+      }
+    });
+  </script>
+</body>
+</html>
