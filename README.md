@@ -11,7 +11,7 @@ Built for modern interaction design.
 
 ---
 
-## Why Pocket Touch
+# Why Pocket Touch
 
 Most web UI frameworks are still designed around desktop interaction patterns.
 
@@ -42,6 +42,8 @@ Build web experiences that feel native, fluid, and alive.
 - Tabs
 - Tab bar
 - Action sheet
+- Motion UI demos
+- Animated interactions
 - Pointer-event interactions
 - Mobile-first primitives
 - Lightweight architecture
@@ -54,14 +56,14 @@ Build web experiences that feel native, fluid, and alive.
 
 # Roadmap
 
-- Motion UI system
-- Spring physics engine
+- Physics engine
+- Spring animation system
 - Velocity tracking
 - Advanced gesture utilities
-- App-like navigation systems
+- App-like navigation
+- Shared motion primitives
 - Interaction animation engine
 - Native-feeling transitions
-- Physics-based movement
 
 ---
 
