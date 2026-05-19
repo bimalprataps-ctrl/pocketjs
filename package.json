@@ -1,5 +1,5 @@
 {
-  "name": "pocketjs",
+  "name": "pocket-touch",
   "version": "0.1.0",
   "description": "A lightweight mobile interaction framework for bottom sheets, swipe cards, touch gestures, motion UI, and app-like web experiences.",
   "type": "module",
