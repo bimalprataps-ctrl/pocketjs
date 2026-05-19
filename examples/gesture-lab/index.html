@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PocketJS Gesture Lab</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f6f4ef;
+      color: #111;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    main {
+      width: min(460px, 92vw);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 48px;
+      letter-spacing: -0.06em;
+      margin: 0 0 10px;
+    }
+
+    p {
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+
+    .stage {
+      height: 420px;
+      border-radius: 36px;
+      background: #fff;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.12);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      touch-action: none;
+    }
+
+    .orb {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: #111;
+      cursor: grab;
+      touch-action: none;
+      will-change: transform;
+    }
+
+    .readout {
+      margin-top: 22px;
+      display: grid;
+      gap: 8px;
+      font-size: 14px;
+      color: #444;
+      text-align: left;
+    }
+
+    .readout div {
+      background: #e8e3d8;
+      padding: 12px 14px;
+      border-radius: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>Gesture Lab</h1>
+    <p>Drag the orb. PocketJS can use this lab to test velocity, direction, distance, and pointer motion.</p>
+
+    <div class="stage" id="stage">
+      <div class="orb" id="orb"></div>
+    </div>
+
+    <div class="readout">
+      <div id="distance">Distance: 0px</div>
+      <div id="direction">Direction: none</div>
+      <div id="velocity">Velocity: 0</div>
+    </div>
+  </main>
+
+  <script>
+    const orb = document.querySelector('#orb');
+    const distanceEl = document.querySelector('#distance');
+    const directionEl = document.querySelector('#direction');
+    const velocityEl = document.querySelector('#velocity');
+
+    let dragging = false;
+    let startX = 0;
+    let startY = 0;
+    let x = 0;
+    let y = 0;
+    let lastX = 0;
+    let lastTime = 0;
+
+    orb.addEventListener('pointerdown', (event) => {
+      dragging = true;
+      startX = event.clientX - x;
+      startY = event.clientY - y;
+      lastX = event.clientX;
+      lastTime = performance.now();
+
+      orb.setPointerCapture(event.pointerId);
+      orb.style.cursor = 'grabbing';
+    });
+
+    orb.addEventListener('pointermove', (event) => {
+      if (!dragging) return;
+
+      x = event.clientX - startX;
+      y = event.clientY - startY;
+
+      const now = performance.now();
+      const deltaX = event.clientX - lastX;
+      const deltaTime = Math.max(now - lastTime, 1);
+      const velocity = Math.abs(deltaX / deltaTime).toFixed(2);
+
+      const distance = Math.round(Math.hypot(x, y));
+      const direction =
+        Math.abs(x) > Math.abs(y)
+          ? x > 0 ? 'right' : 'left'
+          : y > 0 ? 'down' : 'up';
+
+      orb.style.transform = `translate(${x}px, ${y}px)`;
+
+      distanceEl.textContent = `Distance: ${distance}px`;
+      directionEl.textContent = `Direction: ${direction}`;
+      velocityEl.textContent = `Velocity: ${velocity}`;
+
+      lastX = event.clientX;
+      lastTime = now;
+    });
+
+    orb.addEventListener('pointerup', () => {
+      dragging = false;
+      orb.style.cursor = 'grab';
+    });
+
+    orb.addEventListener('pointercancel', () => {
+      dragging = false;
+      orb.style.cursor = 'grab';
+    });
+  </script>
+</body>
+</html>
