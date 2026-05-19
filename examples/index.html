@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PocketJS Examples</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f6f4ef;
+      color: #111;
+      display: grid;
+      place-items: center;
+    }
+
+    main {
+      width: min(920px, 92vw);
+    }
+
+    h1 {
+      font-size: clamp(56px, 10vw, 120px);
+      letter-spacing: -0.08em;
+      line-height: 0.9;
+      margin: 0 0 20px;
+    }
+
+    p {
+      color: #666;
+      font-size: 20px;
+      line-height: 1.5;
+      max-width: 620px;
+      margin-bottom: 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    a {
+      display: block;
+      padding: 28px;
+      border-radius: 28px;
+      background: white;
+      color: #111;
+      text-decoration: none;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      transition: 250ms ease;
+    }
+
+    a:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.13);
+    }
+
+    strong {
+      display: block;
+      font-size: 24px;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    span {
+      color: #666;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>PocketJS Examples</h1>
+
+    <p>
+      Real interactive demos for PocketJS components, gestures, motion,
+      and app-like mobile web interfaces.
+    </p>
+
+    <div class="grid">
+      <a href="./swipe-cards/">
+        <strong>Swipe Cards</strong>
+        <span>Stacked cards with drag gestures and events.</span>
+      </a>
+
+      <a href="./bottom-sheet/">
+        <strong>Bottom Sheet</strong>
+        <span>Native-style snap points and backdrop interaction.</span>
+      </a>
+
+      <a href="./gesture-lab/">
+        <strong>Gesture Lab</strong>
+        <span>Pointer tracking, distance, direction, and velocity.</span>
+      </a>
+
+      <a href="./motion-ui/">
+        <strong>Motion UI</strong>
+        <span>Tap, drag, release, and spring-like transitions.</span>
+      </a>
+
+      <a href="./music-player/">
+        <strong>Music Player</strong>
+        <span>iOS-inspired interface for interaction demos.</span>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
