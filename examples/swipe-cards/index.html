@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PocketJS Swipe Cards Demo</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f6f4ef;
+      color: #111;
+      display: grid;
+      place-items: center;
+    }
+
+    main {
+      width: min(420px, 92vw);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 34px;
+      letter-spacing: -0.05em;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 32px;
+    }
+
+    #swipeDemo {
+      position: relative;
+      height: 420px;
+      margin-bottom: 28px;
+    }
+
+    .pocket-swipe-card {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      border-radius: 36px;
+      background: #fff;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.14);
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+    }
+
+    .card-inner h2 {
+      font-size: 42px;
+      letter-spacing: -0.06em;
+      margin: 0 0 12px;
+    }
+
+    .card-inner p {
+      font-size: 17px;
+      color: #666;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 18px;
+      background: #111;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: #e8e3d8;
+      color: #111;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>PocketJS Swipe Cards</h1>
+    <p class="subtitle">Swipe, control, and listen to real framework events.</p>
+
+    <div id="swipeDemo"></div>
+
+    <div class="controls">
+      <button class="secondary" id="prevBtn">Previous</button>
+      <button id="nextBtn">Next</button>
+      <button class="secondary" id="resetBtn">Reset</button>
+    </div>
+  </main>
+
+  <script type="module">
+    import { createSwipeCards } from '../../src/pocket.js';
+
+    const swipe = createSwipeCards({
+      container: '#swipeDemo',
+      cards: [
+        {
+          content: `
+            <div class="card-inner">
+              <h2>Touch</h2>
+              <p>Drag the card left or right with pointer events.</p>
+            </div>
+          `
+        },
+        {
+          content: `
+            <div class="card-inner">
+              <h2>Motion</h2>
+              <p>The stack responds with depth, scale, and direction.</p>
+            </div>
+          `
+        },
+        {
+          content: `
+            <div class="card-inner">
+              <h2>Events</h2>
+              <p>Swipe events are emitted for real app logic.</p>
+            </div>
+          `
+        },
+        {
+          content: `
+            <div class="card-inner">
+              <h2>PocketJS</h2>
+              <p>A small mobile interaction framework for the modern web.</p>
+            </div>
+          `
+        }
+      ]
+    });
+
+    swipe.on('swipeleft', (event) => {
+      console.log('swipeleft', event.detail);
+    });
+
+    swipe.on('swiperight', (event) => {
+      console.log('swiperight', event.detail);
+    });
+
+    swipe.on('change', (event) => {
+      console.log('change', event.detail);
+    });
+
+    document.querySelector('#prevBtn').onclick = () => swipe.previous();
+    document.querySelector('#nextBtn').onclick = () => swipe.next();
+    document.querySelector('#resetBtn').onclick = () => swipe.goTo(0);
+  </script>
+</body>
+</html>
