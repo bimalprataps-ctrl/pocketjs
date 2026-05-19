@@ -1,14 +1,11 @@
-
 {
   "name": "pocket-touch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A lightweight mobile interaction framework for bottom sheets, swipe cards, touch gestures, motion UI, and app-like web experiences.",
   "type": "module",
-
   "main": "./dist/pocket.cjs.js",
   "module": "./dist/pocket.es.js",
   "types": "./types/index.d.ts",
-
   "exports": {
     ".": {
       "import": "./dist/pocket.es.js",
@@ -16,16 +13,13 @@
       "types": "./types/index.d.ts"
     }
   },
-
   "files": [
     "dist",
     "types",
     "README.md",
     "LICENSE"
   ],
-
   "sideEffects": false,
-
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -33,18 +27,14 @@
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run build"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bimalprataps-ctrl/pocket-touch.git"
   },
-
   "bugs": {
     "url": "https://github.com/bimalprataps-ctrl/pocket-touch/issues"
   },
-
   "homepage": "https://github.com/bimalprataps-ctrl/pocket-touch#readme",
-
   "keywords": [
     "mobile-ui",
     "gesture",
@@ -63,19 +53,14 @@
     "app-like-ui",
     "pointer-events"
   ],
-
   "author": "Bimal Pratap Shah",
   "license": "MIT",
-
   "engines": {
     "node": ">=18"
   },
-
   "dependencies": {},
-
   "devDependencies": {
     "typescript": "latest",
     "vite": "latest"
   }
 }
-
