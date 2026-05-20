@@ -1,59 +1,117 @@
 export function createPullToRefresh(options = {}) {
-  const {
-    threshold = 80,
-    onRefresh = async () => {}
-  } = options
+  const container =
+    typeof options.container === 'string'
+      ? document.querySelector(options.container)
+      : options.container;
 
-  let startY = 0
-  let distance = 0
-  let isPulling = false
+  if (!container) {
+    console.warn('Pocket.createPullToRefresh: container not found');
+    return null;
+  }
 
-  const indicator = document.createElement('div')
-  indicator.className = 'pocket-pull-refresh'
-  indicator.textContent = 'Pull to refresh'
-  document.body.appendChild(indicator)
+  const threshold = options.threshold ?? 72;
+  const resistance = options.resistance ?? 0.55;
+  const maxPull = options.maxPull ?? 130;
 
-  window.addEventListener('touchstart', (event) => {
-    if (window.scrollY !== 0) return
+  let startY = 0;
+  let currentPull = 0;
+  let dragging = false;
+  let refreshing = false;
 
-    startY = event.touches[0].clientY
-    isPulling = true
-  })
+  const indicator = document.createElement('div');
+  indicator.className = 'pocket-pull-refresh-indicator';
+  indicator.innerHTML = '<span>↓ Pull down</span>';
 
-  window.addEventListener('touchmove', (event) => {
-    if (!isPulling) return
+  container.prepend(indicator);
 
-    distance = event.touches[0].clientY - startY
+  Object.assign(indicator.style, {
+    height: '0px',
+    overflow: 'hidden',
+    display: 'grid',
+    placeItems: 'center',
+    transition: 'height 260ms cubic-bezier(0.16, 1, 0.3, 1)',
+    fontSize: '11px',
+    fontWeight: '900',
+    letterSpacing: '0.14em',
+    textTransform: 'uppercase',
+    color: 'rgba(0,0,0,0.55)'
+  });
 
-    if (distance <= 0) return
+  function setPull(value) {
+    currentPull = Math.max(0, Math.min(value, maxPull));
+    indicator.style.height = `${currentPull}px`;
 
-    indicator.classList.add('visible')
-    indicator.style.transform = `translateX(-50%) translateY(${Math.min(distance, 100)}px)`
-
-    indicator.textContent = distance > threshold
-      ? 'Release to refresh'
-      : 'Pull to refresh'
-  })
-
-  window.addEventListener('touchend', async () => {
-    if (!isPulling) return
-
-    if (distance > threshold) {
-      indicator.textContent = 'Refreshing...'
-      await onRefresh()
+    if (refreshing) {
+      indicator.innerHTML = '<span>↻ Refreshing</span>';
+    } else if (currentPull >= threshold) {
+      indicator.innerHTML = '<span>↑ Release to refresh</span>';
+    } else {
+      indicator.innerHTML = '<span>↓ Pull down</span>';
     }
+  }
 
-    indicator.classList.remove('visible')
-    indicator.style.transform = 'translateX(-50%) translateY(0px)'
+  function onPointerDown(event) {
+    if (refreshing) return;
+    if (container.scrollTop > 0) return;
 
-    startY = 0
-    distance = 0
-    isPulling = false
-  })
+    dragging = true;
+    startY = event.clientY;
+    container.setPointerCapture?.(event.pointerId);
+  }
+
+  function onPointerMove(event) {
+    if (!dragging || refreshing) return;
+
+    const diff = event.clientY - startY;
+
+    if (diff <= 0) return;
+
+    event.preventDefault();
+    setPull(diff * resistance);
+  }
+
+  async function onPointerUp(event) {
+    if (!dragging) return;
+
+    dragging = false;
+    container.releasePointerCapture?.(event.pointerId);
+
+    if (currentPull >= threshold) {
+      refreshing = true;
+      setPull(threshold);
+
+      if (typeof options.onRefresh === 'function') {
+        await options.onRefresh();
+      }
+
+      indicator.innerHTML = '<span>✓ Updated</span>';
+
+      window.setTimeout(() => {
+        refreshing = false;
+        setPull(0);
+      }, 650);
+    } else {
+      setPull(0);
+    }
+  }
+
+  container.style.overscrollBehavior = 'contain';
+  container.style.touchAction = 'pan-y';
+
+  container.addEventListener('pointerdown', onPointerDown);
+  container.addEventListener('pointermove', onPointerMove);
+  container.addEventListener('pointerup', onPointerUp);
+  container.addEventListener('pointercancel', onPointerUp);
+  container.addEventListener('lostpointercapture', onPointerUp);
 
   return {
     destroy() {
-      indicator.remove()
+      container.removeEventListener('pointerdown', onPointerDown);
+      container.removeEventListener('pointermove', onPointerMove);
+      container.removeEventListener('pointerup', onPointerUp);
+      container.removeEventListener('pointercancel', onPointerUp);
+      container.removeEventListener('lostpointercapture', onPointerUp);
+      indicator.remove();
     }
-  }
+  };
 }

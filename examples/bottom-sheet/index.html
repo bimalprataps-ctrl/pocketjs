@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pocket Touch Bottom Sheet</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Pocket Touch Example</p>
+    <h1>Bottom Sheet</h1>
+    <p>Tap the button to open a native-style bottom sheet.</p>
+    <button id="openSheet">Open Sheet</button>
+  </main>
+
+  <script type="module">
+    import { Pocket } from '../../src/pocket.js'
+
+    document.querySelector('#openSheet').onclick = () => {
+      Pocket.createBottomSheet({
+        title: 'Pocket Touch',
+        content: '<p>This bottom sheet is powered by Pocket Touch.</p>'
+      })
+    }
+  </script>
+</body>
+</html>
