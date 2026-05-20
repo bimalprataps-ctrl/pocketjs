@@ -8,3 +8,57 @@
 @import './styles/tabs.css';
 @import './styles/modal.css';
 @import './styles/tab-bar.css';
+
+main {
+  padding: 40px 20px 140px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 24px;
+}
+
+button {
+  padding: 14px 22px;
+  border-radius: 14px;
+  border: none;
+  background: #111;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 12px;
+  margin-bottom: 12px;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+#swipeDemo {
+  margin-top: 40px;
+}
+
+#motionDemo {
+  width: 220px;
+  height: 120px;
+  margin: 60px auto;
+  border-radius: 28px;
+  background: #111;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  user-select: none;
+  touch-action: none;
+  cursor: grab;
+  will-change: transform;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.12),
+    0 2px 10px rgba(0, 0, 0, 0.08);
+}
