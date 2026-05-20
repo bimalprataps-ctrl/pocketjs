@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pocket Touch Motion UI</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Pocket Touch Example</p>
+    <h1>Motion UI</h1>
+
+    <p class="intro">
+      Drag the card left or right. Pocket Touch handles velocity, momentum,
+      spring return, rubber banding, and persistent transform state.
+    </p>
+
+    <div id="motionCard">
+      Drag Me
+    </div>
+
+    <div class="actions">
+      <button id="liftBtn">Lift</button>
+      <button id="resetBtn">Reset</button>
+    </div>
+  </main>
+
+  <script type="module">
+    import { Pocket } from '../../src/pocket.js'
+
+    const card = document.querySelector('#motionCard')
+
+    Pocket.drag(card, {
+      axis: 'x',
+      momentum: true,
+      snapBack: true,
+      min: -180,
+      max: 180,
+      resistance: 0.28,
+      friction: 0.92,
+      damping: 18,
+      stiffness: 180
+    })
+
+    document.querySelector('#liftBtn').onclick = () => {
+      Pocket.spring(card, {
+        y: -44,
+        scale: 1.06,
+        damping: 16,
+        stiffness: 180
+      })
+    }
+
+    document.querySelector('#resetBtn').onclick = () => {
+      Pocket.spring(card, {
+        x: 0,
+        y: 0,
+        scale: 1,
+        damping: 16,
+        stiffness: 180
+      })
+    }
+  </script>
+</body>
+</html>
