@@ -1,8 +1,14 @@
 export function createModal(options = {}) {
   const {
     title = '',
-    content = ''
+    description = '',
+    content = '',
+    actions = []
   } = options
+
+  document
+    .querySelectorAll('.pocket-modal-overlay')
+    .forEach((el) => el.remove())
 
   const overlay = document.createElement('div')
   overlay.className = 'pocket-modal-overlay'
@@ -10,17 +16,37 @@ export function createModal(options = {}) {
   const modal = document.createElement('div')
   modal.className = 'pocket-modal'
 
-  modal.innerHTML = `
-    <div class="pocket-modal-header">
-      <h2>${title}</h2>
+  const actionsHtml = actions.length
+    ? `
+      <div class="pocket-modal-actions">
+        ${actions
+          .map(
+            (action) => `
+              <button
+                class="pocket-modal-action pocket-modal-action-${action.style || 'secondary'}"
+              >
+                ${action.label || 'OK'}
+              </button>
+            `
+          )
+          .join('')}
+      </div>
+    `
+    : ''
 
-      <button class="pocket-modal-close">
-        ✕
-      </button>
-    </div>
+  modal.innerHTML = `
+    <button class="pocket-modal-close">
+      ✕
+    </button>
 
     <div class="pocket-modal-content">
-      ${content}
+      ${title ? `<h2>${title}</h2>` : ''}
+
+      ${description ? `<p>${description}</p>` : ''}
+
+      ${content || ''}
+
+      ${actionsHtml}
     </div>
   `
 
@@ -43,13 +69,18 @@ export function createModal(options = {}) {
 
   modal.querySelector('.pocket-modal-close').onclick = close
 
+  modal.querySelectorAll('.pocket-modal-action').forEach((button, index) => {
+    button.onclick = () => {
+      actions[index]?.onClick?.()
+      close()
+    }
+  })
+
   overlay.onclick = (event) => {
     if (event.target === overlay) {
       close()
     }
   }
 
-  return {
-    close
-  }
+  return { close }
 }

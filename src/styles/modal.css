@@ -2,57 +2,134 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
+
   display: grid;
   place-items: center;
+
   padding: 24px;
+
   background: rgba(0, 0, 0, 0.35);
+
   opacity: 0;
+
+  pointer-events: none;
+
   transition: opacity 0.25s ease;
 }
 
 .pocket-modal-overlay.show {
   opacity: 1;
+
+  pointer-events: auto;
 }
 
 .pocket-modal {
+  position: relative;
+
   width: 100%;
   max-width: 480px;
+
   border-radius: 32px;
-  background: #fff;
+
+  background: #ffffff;
+
   overflow: hidden;
-  transform: scale(0.9);
+
   opacity: 0;
-  transition: all 0.25s ease;
-  box-shadow: 0 30px 100px rgba(0,0,0,.22);
+
+  transform: scale(0.92);
+
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.22);
 }
 
 .pocket-modal.show {
-  transform: scale(1);
   opacity: 1;
-}
 
-.pocket-modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 22px 22px 0;
-}
-
-.pocket-modal-header h2 {
-  margin: 0;
-  font-size: 22px;
+  transform: scale(1);
 }
 
 .pocket-modal-close {
+  position: absolute;
+
+  top: 18px;
+  right: 18px;
+
   width: 36px;
   height: 36px;
+
   border: 0;
   border-radius: 999px;
+
   background: #f2f2f2;
-  cursor: pointer;
+
+  color: #111;
+
   font-size: 16px;
+
+  cursor: pointer;
+
+  z-index: 5;
 }
 
 .pocket-modal-content {
-  padding: 22px;
+  padding: 34px 24px 24px;
+}
+
+.pocket-modal-content h2 {
+  margin: 0 48px 12px 0;
+
+  font-size: 22px;
+
+  line-height: 1.2;
+
+  color: #111;
+}
+
+.pocket-modal-content p {
+  margin: 0;
+
+  color: #666;
+
+  line-height: 1.6;
+
+  font-size: 15px;
+}
+
+.pocket-modal-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 24px;
+}
+
+.pocket-modal-action {
+  border: 0;
+
+  border-radius: 999px;
+
+  padding: 11px 18px;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.pocket-modal-action-primary {
+  background: #111;
+
+  color: white;
+}
+
+.pocket-modal-action-secondary {
+  background: #f2f2f2;
+
+  color: #111;
 }
