@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pocket Touch Swipe Cards</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Pocket Touch Example</p>
+    <h1>Swipe Cards</h1>
+    <p>Swipe left or right through stacked cards.</p>
+
+    <div id="swipeDemo"></div>
+  </main>
+
+  <script type="module">
+    import { Pocket } from '../../src/pocket.js'
+
+    Pocket.createSwipeCards({
+      container: '#swipeDemo',
+      cards: [
+        { content: 'Swipe Me' },
+        { content: 'Touch First' },
+        { content: 'Pocket Touch' },
+        { content: 'Native Feel' }
+      ]
+    })
+  </script>
+</body>
+</html>

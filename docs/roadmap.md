@@ -1,120 +1,177 @@
 # Pocket Touch Roadmap
 
-## Vision
+Pocket Touch is evolving from a UI component library into a mobile-native interaction framework for the web.
 
-Pocket Touch aims to become a modern interaction engine for touch-first web experiences.
+The focus is:
 
-The goal is to provide:
-- cinematic motion
-- gesture-first interaction
-- mobile-native feeling interfaces
-- lightweight architecture
-- framework-agnostic primitives
+- touch-first interaction
+- cinematic motion systems
+- spring physics
+- gesture-driven interfaces
+- native-feeling web experiences
 
 ---
 
-# Current Focus
+# Completed
 
-## Core Interaction Systems
+## Core Interaction Primitives
 
 - Bottom sheets
 - Swipe cards
-- Motion UI
-- Gesture handling
+- Modals
+- Toasts
 - Pull to refresh
-- Modal system
-- Toast system
 - Tabs
 - Tab bar
+- Action sheet
 
 ---
 
-# Upcoming Features
+## Motion Engine
 
-## TypeScript Support
+Completed motion systems:
+
+- RAF motion engine
+- Interpolation utilities
+- Spring physics
+- Velocity tracking
+- Momentum decay
+- Drag gestures
+- Persistent transform state
+- Rubber banding
+- Overscroll resistance
+- Elastic boundaries
+
+Core APIs:
+
+```js
+Pocket.animate()
+Pocket.spring()
+Pocket.motion()
+Pocket.drag()
+```
+
+---
+
+## Runnable Examples
+
+Pocket Touch now includes runnable examples for:
+
+```text
+examples/
+  motion-ui/
+  bottom-sheet/
+  swipe-cards/
+  gesture-lab/
+  music-player/
+```
+
+---
+
+# In Progress
+
+## Shared Motion Primitives
+
+Planned primitives:
+
+```text
+fade
+scale
+lift
+snap
+sheet
+drag
+depth
+parallax
+```
+
+Goal:
+
+Create a consistent cinematic motion language across all Pocket Touch components.
+
+---
+
+# Next
+
+## Snap Points
+
+```js
+Pocket.drag(card, {
+  snapPoints: [-320, 0, 320]
+})
+```
+
+This unlocks:
+
+- Tinder-style cards
+- bottom sheet states
+- Apple Maps interactions
+- layered interfaces
+
+---
+
+## Gesture Thresholds
 
 Planned:
-- full type definitions
-- typed component APIs
-- typed event systems
-- autocomplete support
+
+- swipe thresholds
+- dismiss thresholds
+- velocity thresholds
+- directional locking
 
 ---
 
-## Accessibility
+## Sheet Physics
 
-Planned improvements:
-- keyboard navigation
-- focus management
-- reduced motion support
-- screen reader compatibility
-- ARIA integration
+Goal:
 
----
+Create native-feeling bottom sheet systems powered by:
 
-## Motion Systems
-
-Future systems:
-- advanced spring physics
-- motion timeline engine
-- chained animations
-- gesture interruption handling
-- inertia systems
-- animation orchestration
+```text
+drag → velocity → momentum → spring → snap
+```
 
 ---
 
-## Gesture Expansion
+## Timeline API
 
-Planned:
-- multi-touch gestures
-- pinch support
-- rotate support
-- gesture recorder
-- gesture playback
-- pressure-sensitive interactions
+Planned API:
 
----
+```js
+Pocket.timeline()
+```
 
-## Developer Experience
+Goal:
 
-Planned:
-- interactive docs site
-- live playground
-- visual configuration tools
-- devtools overlay
-- debugging utilities
+Coordinate cinematic multi-element motion sequences.
 
 ---
 
-## Framework Adapters
+## Component-Level Motion Integration
 
-Future adapters:
-- React
-- Vue
-- Svelte
-- Solid
-- Web Components
+Integrate the motion engine directly into:
 
-Pocket Touch core will remain framework agnostic.
-
----
-
-## Example Systems
-
-Planned demos:
-- music player
-- swipe feed
-- app navigation
-- mobile dashboard
-- touch gallery
-- motion playground
+- bottom sheets
+- swipe cards
+- modals
+- tabs
+- future primitives
 
 ---
 
 # Long-Term Direction
 
-Pocket Touch is designed around the belief that:
-the future web will feel increasingly physical, animated, and touch-native.
+Pocket Touch is not aiming to become another traditional desktop UI framework.
 
-The framework focuses on interaction as a first-class system rather than static UI widgets.
+The goal is:
+
+```text
+mobile-native interaction systems for the web
+```
+
+focused on:
+- physical movement
+- touch interaction
+- cinematic motion
+- native-feeling interfaces
+- interaction-first architecture

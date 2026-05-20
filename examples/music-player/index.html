@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pocket Touch Music Player</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Pocket Touch Example</p>
+    <h1>Music Player</h1>
+
+    <section id="player">
+      <div class="cover">♪</div>
+      <h2>Midnight Interface</h2>
+      <p>Motion demo track</p>
+
+      <button id="playBtn">Play Motion</button>
+    </section>
+  </main>
+
+  <script type="module">
+    import { Pocket } from '../../src/pocket.js'
+
+    const player = document.querySelector('#player')
+
+    document.querySelector('#playBtn').onclick = () => {
+      Pocket.spring(player, {
+        y: -24,
+        scale: 1.03,
+        damping: 14,
+        stiffness: 180
+      })
+
+      setTimeout(() => {
+        Pocket.spring(player, {
+          y: 0,
+          scale: 1,
+          damping: 16,
+          stiffness: 180
+        })
+      }, 500)
+    }
+  </script>
+</body>
+</html>

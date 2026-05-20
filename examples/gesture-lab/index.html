@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pocket Touch Gesture Lab</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Pocket Touch Example</p>
+    <h1>Gesture Lab</h1>
+    <p>Drag the card horizontally to test velocity, rubber banding, and spring return.</p>
+
+    <div id="gestureCard">
+      Drag Horizontally
+    </div>
+  </main>
+
+  <script type="module">
+    import { Pocket } from '../../src/pocket.js'
+
+    Pocket.drag('#gestureCard', {
+      axis: 'x',
+      momentum: true,
+      snapBack: true,
+      min: -180,
+      max: 180,
+      resistance: 0.28,
+      friction: 0.92,
+      damping: 18,
+      stiffness: 180
+    })
+  </script>
+</body>
+</html>

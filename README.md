@@ -5,7 +5,7 @@
 ![Version](https://img.shields.io/badge/version-0.1.1-black)
 ![Built With](https://img.shields.io/badge/built%20with-Vite-646CFF)
 
-A lightweight mobile interaction framework for bottom sheets, swipe cards, touch interactions, and app-like web experiences across phones, tablets, and desktops.
+A lightweight mobile interaction framework for bottom sheets, swipe cards, touch interactions, motion UI, and app-like web experiences across phones, tablets, and desktops.
 
 Built for modern interaction design.
 
@@ -21,9 +21,13 @@ Pocket Touch focuses on:
 
 - touch-first interaction
 - gesture-driven interfaces
-- cinematic movement
-- lightweight primitives
+- cinematic motion systems
+- app-like navigation
+- spring physics
+- momentum movement
+- elastic interaction systems
 - mobile-native interaction patterns
+- lightweight primitives
 - modern web experiences
 
 The goal is simple:
@@ -45,6 +49,14 @@ Build web experiences that feel native, fluid, and alive.
 - Motion UI demos
 - Animated interactions
 - Pointer-event interactions
+- Touch gestures
+- Velocity tracking
+- Spring physics
+- Momentum movement
+- Rubber banding
+- Overscroll resistance
+- Drag physics
+- Persistent transform state
 - Mobile-first primitives
 - Lightweight architecture
 - CDN support
@@ -54,16 +66,74 @@ Build web experiences that feel native, fluid, and alive.
 
 ---
 
-# Roadmap
+# Motion Engine
 
-- Physics engine
-- Spring animation system
-- Velocity tracking
-- Advanced gesture utilities
-- App-like navigation
-- Shared motion primitives
-- Interaction animation engine
-- Native-feeling transitions
+Pocket Touch includes a lightweight motion engine for native-feeling web interactions.
+
+Core APIs:
+
+```js
+Pocket.animate()
+Pocket.spring()
+Pocket.motion()
+Pocket.drag()
+```
+
+The motion system supports:
+
+- velocity tracking
+- spring animations
+- drag gestures
+- momentum movement
+- rubber banding
+- overscroll resistance
+- persistent transform state
+- elastic boundaries
+
+Example:
+
+```js
+Pocket.drag(card, {
+  axis: 'x',
+  momentum: true,
+  snapBack: true,
+  min: -160,
+  max: 160,
+  resistance: 0.28,
+  friction: 0.92,
+  damping: 18,
+  stiffness: 180
+})
+```
+
+Core interaction chain:
+
+```text
+drag → velocity → momentum → spring → snap
+```
+
+---
+
+# Runnable Examples
+
+Pocket Touch includes runnable examples for:
+
+```text
+examples/
+  motion-ui/
+  bottom-sheet/
+  swipe-cards/
+  gesture-lab/
+  music-player/
+```
+
+These examples demonstrate:
+
+- motion systems
+- gesture handling
+- drag physics
+- spring interactions
+- touch-first UI patterns
 
 ---
 
@@ -104,6 +174,46 @@ npm install pocket-touch
   });
 </script>
 ```
+
+---
+
+# Motion Example
+
+```js
+Pocket.drag(card, {
+  axis: 'x',
+  momentum: true,
+  snapBack: true,
+  min: -160,
+  max: 160,
+  resistance: 0.28
+})
+```
+
+---
+
+# Roadmap
+
+Completed:
+
+- Core interaction primitives
+- RAF motion engine
+- Spring physics
+- Velocity tracking
+- Momentum decay
+- Drag gestures
+- Rubber banding
+- Overscroll resistance
+- Motion UI examples
+
+Next:
+
+- Snap points
+- Gesture thresholds
+- Shared motion primitives
+- Sheet physics
+- Timeline API
+- Cinematic interaction choreography
 
 ---
 
