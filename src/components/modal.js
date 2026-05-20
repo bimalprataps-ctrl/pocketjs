@@ -21,8 +21,10 @@ export function createModal(options = {}) {
       <div class="pocket-modal-actions">
         ${actions
           .map(
-            (action) => `
+            (action, index) => `
               <button
+                type="button"
+                data-pocket-modal-action="${index}"
                 class="pocket-modal-action pocket-modal-action-${action.style || 'secondary'}"
               >
                 ${action.label || 'OK'}
@@ -35,17 +37,14 @@ export function createModal(options = {}) {
     : ''
 
   modal.innerHTML = `
-    <button class="pocket-modal-close">
+    <button type="button" class="pocket-modal-close" aria-label="Close modal">
       ✕
     </button>
 
     <div class="pocket-modal-content">
       ${title ? `<h2>${title}</h2>` : ''}
-
       ${description ? `<p>${description}</p>` : ''}
-
       ${content || ''}
-
       ${actionsHtml}
     </div>
   `
@@ -67,20 +66,19 @@ export function createModal(options = {}) {
     }, 250)
   }
 
-  modal.querySelector('.pocket-modal-close').onclick = close
+  modal.querySelector('.pocket-modal-close')?.addEventListener('click', close)
 
-  modal.querySelectorAll('.pocket-modal-action').forEach((button, index) => {
-    button.onclick = () => {
+  modal.querySelectorAll('.pocket-modal-action').forEach((button) => {
+    button.addEventListener('click', () => {
+      const index = Number(button.dataset.pocketModalAction)
       actions[index]?.onClick?.()
       close()
-    }
+    })
   })
 
-  overlay.onclick = (event) => {
-    if (event.target === overlay) {
-      close()
-    }
-  }
+  overlay.addEventListener('click', (event) => {
+    if (event.target === overlay) close()
+  })
 
   return { close }
 }
